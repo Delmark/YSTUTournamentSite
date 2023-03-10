@@ -1,2 +1,1 @@
-# YSTUTournamentSite :basketball:
-Пока-что пустой репозиторий
+# YSTU Basketball Tournament Site :basketball:
