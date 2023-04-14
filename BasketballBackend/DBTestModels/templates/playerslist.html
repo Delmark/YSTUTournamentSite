@@ -9,7 +9,7 @@
     </header>
     <body>
         {% for player in players %}
-        <a href='{% url "player_info" player.player_id %}'>{{player.first_name}} {{player.last_name}}</a>
+        <p><a href='{% url "player_info" player.player_id %}'>{{player.first_name}} {{player.last_name}}</a></p>
         {% endfor %}
     </body>
 </html>
