@@ -19,4 +19,13 @@ class Player(models.Model):
         return f'{self.first_name} {self.last_name} {self.team_id.team_name}'
 
     
-
+class PlayerStats(models.Model):
+    player_id = models.ForeignKey(Player, verbose_name=("ID игрока"), on_delete=models.CASCADE)
+    games_played = models.IntegerField(verbose_name="Сыграно игр", default=0)
+    total_score = models.IntegerField(verbose_name="Всего очков", default=0)
+    
+    def __str__(self) -> str:
+        return f"Статистика игрока {self.player_id.first_name + self.player_id.last_name}"
+    
+    def average_score_count(self):
+        return self.games_played/self.total_score

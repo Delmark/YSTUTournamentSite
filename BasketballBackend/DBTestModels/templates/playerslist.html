@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" >
+        <title></title>
+    </head>
+    <header>
+        <h1>Лучшие игроки за 2023</h1>
+    </header>
+    <body>
+        {% for player in players %}
+        <a href='{% url "player_info" player.player_id %}'>{{player.first_name}} {{player.last_name}}</a>
+        {% endfor %}
+    </body>
+</html>
