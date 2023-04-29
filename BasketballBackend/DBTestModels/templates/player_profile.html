@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Личный кабинет {{ player.first_name }} {{ player.last_name }}
+{% endblock %}
+
+{% block content %}
+    <h1>Личный кабинет {{ player.first_name }} {{ player.last_name }}</h1>
+    <p>Возраст: {{ player.age }}</p>
+    <p>Количество сыгранных игр: {{ player_stats.games_played }}</p>
+    <p>Общий счёт: {{ player_stats.total_score }}</p>
+{% endblock %}

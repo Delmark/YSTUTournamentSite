@@ -1,19 +1,15 @@
-<!DOCTYPE html>
-<html lang="ru">
-    <head>
-        <meta charset="utf-8" >
-        <title></title>
-    </head>
-    <header>
-        <h1>Игрок: {{player.player_id.first_name}} {{player.player_id.last_name}}</h1>
-    </header>
-    <body>
-        <p>Имя: {{player.player_id.first_name}}</p>
-        <p>Фамилия: {{player.player_id.last_name}}</p>
-        <p>Возраст: {{player.player_id.age}}</p>
-        <p>Команда: {{player.player_id.team_id.team_name}}</p>
-        <p>Сыграно игр: {{player.games_played}}</p>
-        <p>Всего очков: {{player.total_score}}</p>
-        <p>Среднее количество очков за игры: {{player.average_score_count}}</p>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+    Игрок: {{playerStats.player.first_name}} {{playerStats.player.last_name}}
+{% endblock %}
+
+{% block content %}
+    <p>Имя: {{playerStats.player.first_name}}</p>
+    <p>Фамилия: {{playerStats.player.last_name}}</p>
+    <p>Возраст: {{playerStats.player.age}}</p>
+    <p>Команда: {{playerStats.player.team_id.team_name}}</p>
+    <p>Сыграно игр: {{playerStats.games_played}}</p>
+    <p>Всего очков: {{playerStats.total_score}}</p>
+    <p>Среднее количество очков за игры: {{playerStats.average_score_count}}</p>
+{% endblock content %}

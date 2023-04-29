@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Team(models.Model):
     team_id = models.AutoField(verbose_name='ID Команды', primary_key=True)
@@ -20,12 +21,12 @@ class Player(models.Model):
 
     
 class PlayerStats(models.Model):
-    player_id = models.ForeignKey(Player, verbose_name=("ID игрока"), on_delete=models.CASCADE)
+    player = models.ForeignKey(Player, verbose_name=("ID игрока"), on_delete=models.CASCADE)
     games_played = models.IntegerField(verbose_name="Сыграно игр", default=0)
     total_score = models.IntegerField(verbose_name="Всего очков", default=0)
     
     def __str__(self) -> str:
-        return f"Статистика игрока {self.player_id.first_name + self.player_id.last_name}"
+        return f"Статистика игрока {self.player.first_name + self.player.last_name}"
     
     def average_score_count(self):
         return self.games_played/self.total_score
