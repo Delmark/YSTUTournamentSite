@@ -15,8 +15,11 @@
                 <li><a href="{% url 'home' %}">Главная</a></li>
                 <li><a href="{% url 'about' %}">О нас</a></li>
                 <li><a href="{% url 'players' %}">Игроки</a></li>
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated and not user.is_superuser %}
                     <li><a href="{% url 'player_profile' %}">Личный кабинет</a></li>
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                {% elif user.is_superuser %}
+                    <li><a href="{% url 'admin_profile' %}">Управление турниром</a></li>
                     <li><a href="{% url 'logout' %}">Выйти</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}">Войти</a></li>

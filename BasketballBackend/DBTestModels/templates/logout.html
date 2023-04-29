@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Выход из системы
+{% endblock %}
+
+{% block content %}
+    <h1>Выход из системы</h1>
+    <p>Вы действительно хотите выйти из системы?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Выйти">
+    </form>
+{% endblock %}

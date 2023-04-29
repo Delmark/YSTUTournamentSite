@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from .models import News, Player, PlayerStats, Team
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(max_length=254, required=True, widget=forms.EmailInput())
@@ -18,3 +19,8 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = ('title', 'content')

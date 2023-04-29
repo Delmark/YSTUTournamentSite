@@ -1,8 +1,14 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate, logout
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.views import LoginView
+from django.core.exceptions import ObjectDoesNotExist
 
-from .models import Player, PlayerStats
+
+from .models import Player, PlayerStats, User, News
+from .forms import NewsForm
 
 class PlayerView(ListView):
     model = Player
@@ -15,10 +21,18 @@ class PlayerView(ListView):
         return context
 
 def home(request):
-    return render(request, 'home.html')
+    news = News.objects.all()
+    context = {
+        'articles': news,
+    }
+    return render(request, 'home.html', context)
 
 def about(request):
     return render(request, 'about.html')
+
+def logoutv(request):
+    logout(request)
+    return redirect('home')
 
 class PlayerInfo(DetailView):
     model = PlayerStats
@@ -31,16 +45,28 @@ class PlayerInfo(DetailView):
         return context
 
 def player_profile(request):
-    player = Player.objects.get(user=request.user)
-    player_stats = PlayerStats.objects.get(player=player)
-    context = {
-        'player': player,
-        'player_stats': player_stats,
-    }
-    return render(request, 'player_profile.html', context)
+    try:
+        player = Player.objects.get(user=request.user)
+        player_stats = PlayerStats.objects.get(player=player)
+        context = {
+            'player': player,
+            'player_stats': player_stats,
+        }
+        return render(request, 'player_profile.html', context)
+    except ObjectDoesNotExist:
+        return render(request, 'player_profile_no_stats.html')
+
+from django.shortcuts import render
+from .models import News
 
 def admin_profile(request):
-    return render(request, 'admin_profile.html')
+    news = News.objects.all()
+    players = Player.objects.all()
+    context = {
+        'news': news,
+        'players': players
+    }
+    return render(request, 'admin_profile.html', context)
 
 from .forms import RegisterForm, LoginForm
 
@@ -69,3 +95,17 @@ def login(request):
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
+
+class MyLoginView(LoginView):
+    template_name = 'login.html'
+
+    def get_success_url(self):
+        user = self.request.user
+        if user.groups.filter(name='admin').exists():
+            return '/admin_profile/'
+        else:
+            try:
+                player = Player.objects.get(user=user)
+            except ObjectDoesNotExist:
+                return reverse('home')
+            return '/player_profile/'
