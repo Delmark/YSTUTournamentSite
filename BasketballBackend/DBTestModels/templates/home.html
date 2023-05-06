@@ -8,7 +8,7 @@
 
   <h1>НОВОСТИ</h1>
   {% for article in articles %}
-    <h2>{{article.title}}</h2>
+    <h2>{{article.title}} - {{article.pub_date}}</h2>
     <p>{{article.content}}</p>
   {% empty %}
     <p>Нет новостей</p>

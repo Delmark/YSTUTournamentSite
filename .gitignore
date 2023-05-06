@@ -1,1 +1,3 @@
-BasketballBackend/DBTestModels/db.sqlite3
+/BasketballBackend/Scripts
+/BasketballBackend/pyvenv.cfg
+/BasketballBackend/Include
