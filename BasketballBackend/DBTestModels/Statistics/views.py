@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.paginator import Paginator
 
 
 from .models import Player, PlayerStats, User, News
@@ -22,8 +23,12 @@ class PlayerView(ListView):
 
 def home(request):
     news = News.objects.all()
+    paginator = Paginator(news,5)
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     context = {
-        'articles': news,
+        'page_obj': page_obj,
     }
     return render(request, 'home.html', context)
 
