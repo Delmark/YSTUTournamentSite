@@ -1,4 +1,7 @@
 # YSTU Basketball Tournament Site :basketball:
+
+DBTestModels - тестовый полигон для изучения фреймворка, Backend - то что мы реализуем в конечном итоге. 
+
 Доступ к админке 127.0.0.1:8000/admin
 Username: YSTUClassic
 Password: NoWaying
@@ -21,7 +24,7 @@ Password: NoWaying
  
 Можно запускать сайт, для этого заходим в проект.  
 
-```cd DBTestModels```
+```cd DBTestModels``` или ```cd Backend```
 Для запуска сервера необходимо прописать:  
 
 ```py manage.py runserver```
