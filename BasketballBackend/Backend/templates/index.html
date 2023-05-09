@@ -1,0 +1,208 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href=" {% static 'css/index.css' %}">
+    <title>Главная</title>
+</head>
+<body>
+    <header>
+        <img src=" {% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo" id="logo">
+        <div class="navigation">
+            <a href="" class="main-link">Главная</a>
+            <a href="" class="teams-link">Команды</a>
+            <a href="" class="timetable-link">Расписание</a>
+            <a href="" class="results-link">Результаты</a>
+            <a href="" class="archive-link">Архив</a>
+            <a href="" class="contacts-link">Контакты</a>
+        </div>
+        <div class="buttons">
+            <a href="" class="registration-btn">Регистрация</a>
+            <a href="" class="logIn-btn">Войти</a>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="carousel">
+            <div class="slide">
+                <img src="{% static 'content/images/carousel_photo.png' %}" alt="Photo 1" class="slide_photo fade">
+                <div class="slide_text">
+                    <p class="slide_text-box fade">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum mi at neque sodales ullamcorper.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="{% static 'content/images/back-for-carousel.png' %}" alt="Photo 2" class="slide_photo fade">
+                <div class="slide_text">
+                    <p class="slide_text-box fade">Событие 2</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="{% static 'content/images/back-for-carousel.png' %}" alt="Photo 3" class="slide_photo fade">
+                <div class="slide_text">
+                    <p class="slide_text-box fade">Событие 3</p>
+                </div>
+            </div>
+            <a class="slide_prev" onclick="plusSlides(-1)">❮</a>
+            <a class="slide_next" onclick="plusSlides(1)">❯</a>
+            <div class="carousel_indicator" style="text-align:center">
+                <span class="sld-ind" onclick="currentSlide(1)"></span>
+                <span class="sld-ind" onclick="currentSlide(2)"></span>
+                <span class="sld-ind" onclick="currentSlide(3)"></span>
+            </div>
+        </section>
+
+        <section class="tournament_table">
+            <p class="tour-tbl_title">Турнирная сетка</p>
+            <div class="tour-tbl"></div>
+        </section>
+
+        <section class="teams-rating">
+            <p class="tm-rat_title">Рейтинг команд</p>
+            <div class="tm-rat">
+                <div class="tm-rat_1-3_places">
+                    <div class="tm-rat_2_place">
+                        <div class="place_2_form"></div>
+                        <p class="place_2_title">2 место</p>
+                    </div>
+                    <div class="tm-rat_1_place">
+                        <div class="place_1_form"></div>
+                        <p class="place_1_title">1 место</p>
+                    </div>
+                    <div class="tm-rat_3_place">
+                        <div class="place_3_form"></div>
+                        <p class="place_3_title">3 место</p>
+                    </div>
+                </div>
+                <div class="tm-rat_4-10_places">
+                    <div class="tm-rat_4_place">
+                        <div class="place_4_form"></div>
+                        <p class="place_4_title">4 место</p>
+                    </div>
+                    <div class="tm-rat_5_place">
+                        <div class="place_5_form"></div>
+                        <p class="place_5_title">5 место</p>
+                    </div>
+                    <div class="tm-rat_6_place">
+                        <div class="place_6_form"></div>
+                        <p class="place_6_title">6 место</p>
+                    </div>
+                    <div class="tm-rat_7_place">
+                        <div class="place_7_form"></div>
+                        <p class="place_7_title">7 место</p>
+                    </div>
+                    <div class="tm-rat_8_place">
+                        <div class="place_8_form"></div>
+                        <p class="place_8_title">8 место</p>
+                    </div>
+                    <div class="tm-rat_9_place">
+                        <div class="place_9_form"></div>
+                        <p class="place_9_title">9 место</p>
+                    </div>
+                    <div class="tm-rat_10_place">
+                        <div class="place_10_form"></div>
+                        <p class="place_10_title">10 место</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="news">
+            <p class="news_title">Новости</p>
+            {% for article in news %}
+            <div class="news_card">
+                <p class="news_card-title">{{article.title}}</p>
+                <p class="news_card-text">{{article.short_desc}}</p>
+                <p class="news_card-date">{{article.pub_date}}</p>
+                <img class="news_card-photo" src="{{ article.get_thumbnail }}" alt="{{ article.title }}">
+            </div>
+            {% endfor %}
+        </section>
+
+        <section class="photo_album">
+            <p class="pht-alb_title">Фото-галерея</p>
+            <div class="pht-alb">
+                <div class="pht-alb_card">
+                    <div class="pht-alb_photo"></div>
+                    <p class="pht-alb_signature">Подпись фото</p>
+                </div>
+                <div class="pht-alb_card">
+                    <div class="pht-alb_photo"></div>
+                    <p class="pht-alb_signature">Подпись фото</p>
+                </div>
+                <div class="pht-alb_card">
+                    <div class="pht-alb_photo"></div>
+                    <p class="pht-alb_signature">Подпись фото</p>
+                </div>
+                <div class="pht-alb_card">
+                    <div class="pht-alb_photo"></div>
+                    <p class="pht-alb_signature">Подпись фото</p>
+                </div>
+                <div class="pht-alb_card">
+                    <div class="pht-alb_photo"></div>
+                    <p class="pht-alb_signature">Подпись фото</p>
+                </div>
+                <div class="pht-alb_card">
+                    <div class="pht-alb_photo"></div>
+                    <p class="pht-alb_signature">Подпись фото</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="video_album">
+            <p class="vid-alb_title">Последние видео</p>
+            <div class="vid-alb">
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <img src=" {% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
+        <div class="links">
+            <div class="link-str">
+                <a href="" class="vk-link"><i class='bx bxl-vk'></i></a>
+                <a href="" class="doc-link">Документация</a>
+                <a href="" class="contact-link">Контакты</a>
+                <a href="" class="site-link">www.ystu.ru</a>
+            </div>
+            <div class="link-buttons">
+                <a href="" class="mail-link">ПОЧТА@YSTU.RU</a>
+                <div class="btn-lnk">
+                    <a href="" class="registration-btn">Регистрация</a>
+                    <a href="" class="logIn-btn">Войти</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src=" {% static 'scripts/index.js' %}"></script>
+</body>
+</html>
