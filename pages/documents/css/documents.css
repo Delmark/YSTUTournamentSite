@@ -1,0 +1,28 @@
+.main {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto;
+  width: 1259px;
+  padding: 60px 100px;
+  background: none;
+  justify-content: center;
+  gap: 50px;
+  opacity: 1;
+
+}
+
+.document-link {
+  display: flex;
+  width: 45%;
+  background-color: rgb(229, 229, 229, 0.7);
+  border-radius: 20px;
+  font-size: 48px;
+  color: #10498a;
+  padding: 15px;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  font-weight: 700;
+  text-decoration: none;
+  gap: 10px;
+}
