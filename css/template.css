@@ -1,11 +1,12 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
 }
 
 body {
-    background: rgb(255,171,94);
-    background: linear-gradient(45deg, rgba(255,171,94,1) 0%, rgba(198,198,255,1) 65%, rgba(91,108,255,1) 100%);
+    background: rgb(255, 171, 94);
+    background: linear-gradient(45deg, rgba(255, 171, 94, 1) 0%, rgba(198, 198, 255, 1) 65%, rgba(91, 108, 255, 1) 100%);
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
 }
@@ -14,9 +15,11 @@ body {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
@@ -164,7 +167,8 @@ footer .links {
     grid-template-rows: 1fr 1fr;
 }
 
-footer .links .link-str a, footer .links .link-buttons .mail-link {
+footer .links .link-str a,
+footer .links .link-buttons .mail-link {
     display: block;
     margin: auto;
     text-decoration: none;
@@ -186,7 +190,8 @@ footer .links .link-str {
 
 }
 
-footer .links .link-str a:hover, footer .links .link-buttons .mail-link:hover {
+footer .links .link-str a:hover,
+footer .links .link-buttons .mail-link:hover {
     color: #CE690E;
     text-decoration: underline;
 }
