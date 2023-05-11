@@ -8,7 +8,7 @@
   justify-content: center;
   gap: 50px;
   opacity: 1;
-
+  
 }
 
 .document-link {
@@ -19,6 +19,7 @@
   font-size: 48px;
   color: #10498a;
   padding: 15px;
+  font-family: "DIN Pro Bold";
   justify-content: center;
   align-items: center;
   line-height: 1;
