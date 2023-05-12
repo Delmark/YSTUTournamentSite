@@ -12,7 +12,7 @@ class News(models.Model):
     def get_thumbnail(self):
         if not self.thumbnail:
             return 'media/images/placeholder.png'
-        return self.thumbnail
+        return self.thumbnail.url
 
     def __str__(self) -> str:
         return self.title

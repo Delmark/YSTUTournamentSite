@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -5,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <title>Главная</title>
 </head>
 <body>
@@ -47,7 +48,7 @@
     </div>
 
     <header id="header">
-        <img src="content/images/logo.png" alt="Лого сайта" class="logo" id="logo">
+        <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo" id="logo">
         <div class="navigation">
             <a href="index.html" class="main-link">Главная</a>
             <a href="teams.html" class="teams-link">Команды</a>
@@ -67,19 +68,19 @@
 
         <section class="carousel">
             <div class="slide">
-                <img src="content/images/carousel_photo.png" alt="Photo 1" class="slide_photo fade">
+                <img src="{% static 'content/images/carousel_photo.png' %}" alt="Photo 1" class="slide_photo fade">
                 <div class="slide_text">
                     <p class="slide_text-box fade">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum mi at neque sodales ullamcorper.</p>
                 </div>
             </div>
             <div class="slide">
-                <img src="content/images/back-for-carousel.png" alt="Photo 2" class="slide_photo fade">
+                <img src="{% static 'content/images/carousel_photo.png' %}" alt="Photo 2" class="slide_photo fade">
                 <div class="slide_text">
                     <p class="slide_text-box fade">Событие 2</p>
                 </div>
             </div>
             <div class="slide">
-                <img src="content/images/back-for-carousel.png" alt="Photo 3" class="slide_photo fade">
+                <img src="{% static 'content/images/back-for-carousel.png' %}" alt="Photo 3" class="slide_photo fade">
                 <div class="slide_text">
                     <p class="slide_text-box fade">Событие 3</p>
                 </div>
@@ -150,37 +151,14 @@
 
         <section class="news">
             <p class="news_title">Новости</p>
+            {% for article in news %}
             <div class="news_card">
-                <div class="news_card-textbox">
-                    <p class="news_card-title">Заголовок новости</p>
-                    <p class="news_card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, porro ut voluptatibus ex explicabo eligendi! Quasi, modi cupiditate porro corporis voluptatem odit non ducimus, possimus nesciunt corrupti animi eum consequatur!
-                Placeat corrupti in facilis molestiae quod tempora fugit similique, quasi dicta accusantium possimus distinctio perspiciatis repudiandae quidem neque.</p>
-                    <p class="news_card-date">00.00.0000 00:00</p>
-                </div>
-                <div class="news_card-photo"></div>
+                <p class="news_card-title">{{article.title}}</p>
+                <p class="news_card-text">{{article.short_desc}}</p>
+                <p class="news_card-date">{{article.pub_date}}</p>
+                <img class="news_card-photo" src="{{ article.get_thumbnail }}" alt="{{ article.title }}">
             </div>
-            <div class="news_card">
-                <div class="news_card-textbox">
-                    <p class="news_card-title">Заголовок новости</p>
-                    <p class="news_card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, porro ut voluptatibus ex explicabo eligendi! Quasi, modi cupiditate porro corporis voluptatem odit non ducimus, possimus nesciunt corrupti animi eum consequatur!
-                        Placeat corrupti in facilis molestiae quod tempora fugit similique, quasi dicta accusantium possimus distinctio perspiciatis repudiandae quidem neque. Corrupti voluptates officia autem quas, rem est velit dolorum tempore vitae voluptas?
-                        Recusandae dolorem odit qui tempora, saepe laboriosam rem nisi dicta est asperiores tempore earum? Alias consequuntur illo, illum, quam voluptas fugit tempora veritatis reprehenderit harum recusandae, rem porro impedit deserunt?</p>
-                    <p class="news_card-date">00.00.0000 00:00</p>
-                </div>
-                <div class="news_card-photo"></div>
-            </div>
-            <div class="news_card">
-                <div class="news_card-textbox">
-                    <p class="news_card-title">Заголовок новости</p>
-                    <p class="news_card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio atque alias sequi eius. Quidem rem, ducimus sed non illum, dicta enim earum assumenda corporis iusto blanditiis iure. Voluptatibus, ex atque!
-                        Facere blanditiis dolorum delectus eius libero quos enim dolorem, nesciunt magni eaque nobis molestiae laborum iste? Assumenda, consequatur eos sunt unde animi deserunt autem necessitatibus ex natus delectus reprehenderit voluptatibus.
-                        Incidunt eveniet laborum, officia, voluptatem dicta laudantium eius qui reiciendis aspernatur, sequi eos odio. Consectetur quisquam, aspernatur nulla quidem nam libero, ipsam delectus recusandae ad tempora, inventore quis maiores. Id?
-                        Qui sequi aperiam rem eum impedit nostrum animi ex, reprehenderit sint dolores molestias consequatur alias, eius ipsa dolor quia necessitatibus perferendis illum voluptate culpa suscipit? Laborum rem repudiandae doloremque magnam!
-                        Hic sapiente saepe a reprehenderit dicta vel impedit cupiditate fuga aliquid nihil tempore quos porro similique repudiandae praesentium vero, unde fugit eligendi aut? Delectus tempore aliquam ducimus illum asperiores repellendus?</p>
-                    <p class="news_card-date">00.00.0000 00:00</p>
-                </div>
-                <div class="news_card-photo"></div>
-            </div>
+            {% endfor %}
         </section>
 
         <section class="photo_album">
@@ -245,7 +223,7 @@
     </main>
 
     <footer>
-        <img src="content/images/logo.png" alt="Лого сайта" class="logo">
+        <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
         <div class="links">
             <div class="link-str">
                 <a href="https://vk.com/ystu_physedu" target="_blank" class="vk-link"><i class='bx bxl-vk'></i></a>
@@ -263,6 +241,6 @@
         </div>
     </footer>
 
-    <script src="scripts/index.js"></script>
+    <script src="{% static 'scripts/index.js' %}"></script>
 </body>
 </html>
