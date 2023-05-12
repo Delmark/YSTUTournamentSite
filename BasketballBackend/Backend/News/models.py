@@ -16,3 +16,18 @@ class News(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+class Photo(models.Model):
+    title = models.CharField(verbose_name='Заголовок', max_length=255)
+    description = models.TextField(verbose_name='Описание', blank=True)
+    image = models.ImageField(verbose_name='Изображение', upload_to='gallery/images/', validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'webp', 'jpeg', 'gif'))])
+    pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
+
+    @property
+    def get_image(self):
+        if not self.image:
+            return 'media/images/placeholder.png'
+        return self.image.url
+
+    def __str__(self) -> str:
+        return self.title

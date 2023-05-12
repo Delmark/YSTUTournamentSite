@@ -3,6 +3,7 @@ from django.core.validators import FileExtensionValidator
 
 class Team(models.Model):
     name = models.CharField(verbose_name="Название команды", max_length=120, unique=True)
+    
 
     def __str__(self):
         return self.name
@@ -25,11 +26,19 @@ class Player(models.Model):
 
 class TeamStatistic(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
+    logo = models.ImageField(upload_to='teams/logos/', blank=True)
+    rating = models.IntegerField(default=0, blank=True)
     played_games = models.IntegerField(verbose_name="Сыграно игр", default=0, blank=True)
     wins = models.IntegerField(verbose_name="Победы", default=0, blank=True)
     draws = models.IntegerField(verbose_name="Ничьи", default=0, blank=True)
     losses = models.IntegerField(verbose_name="Поражения", default=0, blank=True)
     players = models.ManyToManyField(Player)
+
+    @property
+    def get_logo(self):
+        if not self.logo:
+            return 'media/images/placeholder.png'
+        return self.logo.url
 
     def win_percentage(self):
         if self.played_games == 0:
