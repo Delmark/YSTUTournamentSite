@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/results.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Результаты</title>
+</head>
+<body>
+    <div class="flag" id="flag"></div>
+
+    <div class="regist_log">
+        <p class="reglog_close-btn" id="reglog_close-button">❯</p>
+        <div class="reglog_container">
+            <form class="registration">
+                <p class="reg_text">Регистрация</p>
+                <input class="reg_input" type="text" placeholder="Введите фамилию" name="last_name" required>
+
+                <input class="reg_input" type="text" placeholder="Введите имя" name="first_name" required>
+
+                <input class="reg_input" type="text" placeholder="Введите отчество (если имеется)" name="otchestvo">
+
+                <input class="reg_input" type="date" placeholder="Введите дату рождения" name="birth_date" required>
+
+                <input class="reg_input" type="email" placeholder="Введите электронную почту" name="email" required>
+
+                <input class="reg_input" type="text" placeholder="Введите логин" name="login" required>
+
+                <input class="reg_input" type="password" placeholder="Введите пароль" name="password" required>
+
+                <button class="reg_button" type="submit">Регистрация</button>
+            </form>
+            <div class="reg_line"></div>
+            <form class="log_in">
+                <p class="log_text">Вход</p>
+                <input class="log_input" type="text" placeholder="Введите логин" name="login" required>
+
+                <input class="log_input" type="password" placeholder="Введите пароль" name="password" required>
+
+                <button class="log_button" type="submit">Войти</button>
+            </form>
+        </div>
+    </div>
+
+    <header id="header">
+        <img src="content/images/logo.png" alt="Лого сайта" class="logo" id="logo">
+        <div class="navigation">
+            <a href="index.html" class="main-link">Главная</a>
+            <a href="teams.html" class="teams-link">Команды</a>
+            <a href="schedule.html" class="timetable-link">Расписание</a>
+            <a href="results.html" class="results-link">Результаты</a>
+            <a href="archieve.html" class="archieve-link">Архив</a>
+            <a href="contacts.html" class="contacts-link">Контакты</a>
+        </div>
+        <div class="buttons">
+            <p class="registration-btn" id="registration-button_header">Регистрация</p>
+            <p class="logIn-btn" id="logIn-button_header">Войти</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="reglog_backgr"></div>
+
+        <section class="tournament_table">
+            <p class="tour-tbl_title">Турнирная сетка</p>
+            <div class="tour-tbl"></div>
+        </section>
+
+        <form class="list">
+            <select class="comand_list" name="comands" id="tournm_comand" required>
+                <option value="">Выберите команду</option>
+                <option value="Comand 1">Команда 1</option>
+                <option value="Comand 2">Команда 2</option>
+                <option value="Comand 3">Команда 3</option>
+            </select>
+        </form>
+
+        <p class="match_title">Команда 1</p>
+        <div class="match_card">
+            <div class="match_command_1">
+                <div class="match_command_1-photo"></div>
+                <p class="match_command_1-name">Команда 1</p>
+            </div>
+            <div class="match_info">
+                <p class="match_date">00.00.0000</p>
+                <p class="match_place">СП Место</p>
+                <p class="match-season">Сезон 1</p>
+                <p class="match_score">0:0</p>
+            </div>
+            <div class="match_command_2">
+                <p class="match_command_2-name">Команда 2</p>
+                <div class="match_command_2-photo"></div>
+            </div>
+        </div>
+        <div class="match_card">
+            <div class="match_command_1">
+                <div class="match_command_1-photo"></div>
+                <p class="match_command_1-name">Команда 1</p>
+            </div>
+            <div class="match_info">
+                <p class="match_date">00.00.0000</p>
+                <p class="match_place">СП Место</p>
+                <p class="match-season">Сезон 1</p>
+                <p class="match_score">0:0</p>
+            </div>
+            <div class="match_command_2">
+                <p class="match_command_2-name">Команда 2</p>
+                <div class="match_command_2-photo"></div>
+            </div>
+        </div>
+
+        <p class="scores_title">Статистика</p>
+        <div class="scores_form"></div>
+    </main>
+
+    <footer>
+        <img src="content/images/logo.png" alt="Лого сайта" class="logo">
+        <div class="links">
+            <div class="link-str">
+                <a href="https://vk.com/ystu_physedu" target="_blank" class="vk-link"><i class='bx bxl-vk'></i></a>
+                <a href="docs.html" class="doc-link">Документация</a>
+                <a href="contacts.html" class="contact-link">Контакты</a>
+                <a href="https://www.ystu.ru/" target="_blank" class="site-link">www.ystu.ru</a>
+            </div>
+            <div class="link-buttons">
+                <a href="" class="mail-link">ПОЧТА@YSTU.RU</a>
+                <div class="btn-lnk">
+                    <p class="registration-btn" id="registration-button_footer">Регистрация</p>
+                    <p class="logIn-btn" id="logIn-button_footer">Войти</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/results.js"></script>
+</body>
+</html>
