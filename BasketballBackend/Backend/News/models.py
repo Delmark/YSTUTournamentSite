@@ -6,7 +6,7 @@ class News(models.Model):
     short_desc = models.TextField(verbose_name="Краткое содержание")
     content = models.TextField(verbose_name='Содержание')
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
-    thumbnail = models.ImageField(verbose_name='Превью поста', blank=True, upload_to='/news_thumbnails/images/', validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'webp', 'jpeg', 'gif'))])
+    thumbnail = models.ImageField(verbose_name='Превью поста', blank=True, upload_to='news_thumbnails/images/', validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'webp', 'jpeg', 'gif'))])
 
     @property
     def get_thumbnail(self):
