@@ -32,7 +32,7 @@ class TeamStatistic(models.Model):
     wins = models.IntegerField(verbose_name="Победы", default=0, blank=True)
     draws = models.IntegerField(verbose_name="Ничьи", default=0, blank=True)
     losses = models.IntegerField(verbose_name="Поражения", default=0, blank=True)
-    players = models.ManyToManyField(Player)
+    players = models.ManyToManyField(Player,blank=True)
 
     @property
     def get_logo(self):

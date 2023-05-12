@@ -391,6 +391,22 @@ main {
 .tm-rat_9_place {margin-left: 54.5%;}
 .tm-rat_10_place {margin-left: 64.5%;}
 
+.tm-rat .place_1_form img,
+.tm-rat .place_2_form img,
+.tm-rat .place_3_form img,
+.tm-rat .place_4_form img,
+.tm-rat .place_5_form img,
+.tm-rat .place_6_form img,
+.tm-rat .place_7_form img,
+.tm-rat .place_8_form img,
+.tm-rat .place_9_form img,
+.tm-rat .place_10_form img {
+  max-width: 70%;
+  max-height: 70%;
+  border-radius: 20px;
+  margin: 15% 15%
+}
+
 /* Main -> News */
 
 .news {

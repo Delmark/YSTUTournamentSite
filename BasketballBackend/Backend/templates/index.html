@@ -103,48 +103,20 @@
             <p class="tm-rat_title">Рейтинг команд</p>
             <div class="tm-rat">
                 <div class="tm-rat_1-3_places">
-                    <div class="tm-rat_2_place">
-                        <div class="place_2_form"></div>
-                        <p class="place_2_title">2 место</p>
+                    {% for team in teams|slice:":3" %}
+                    <div class="tm-rat_{{forloop.counter}}_place">
+                        <div class="place_{{forloop.counter}}_form"><img src="{{ team.get_logo }}" class="team-logo" alt="logo"></div>
+                        <p class="place_{{forloop.counter}}_title">{{forloop.counter}} место - {{ team.team.name }}</p>
                     </div>
-                    <div class="tm-rat_1_place">
-                        <div class="place_1_form"></div>
-                        <p class="place_1_title">1 место</p>
-                    </div>
-                    <div class="tm-rat_3_place">
-                        <div class="place_3_form"></div>
-                        <p class="place_3_title">3 место</p>
-                    </div>
+                    {% endfor %}
                 </div>
                 <div class="tm-rat_4-10_places">
-                    <div class="tm-rat_4_place">
-                        <div class="place_4_form"></div>
-                        <p class="place_4_title">4 место</p>
+                    {% for team in teams|slice:"3:" %}
+                    <div class="tm-rat_{{forloop.counter0|add:4}}_place">
+                        <div class="place_{{forloop.counter0|add:4}}_form"><img src="{{ team.get_logo }}" class="team-logo"></div>
+                        <p class="place_{{forloop.counter0|add:4}}_title">{{forloop.counter0|add:4}} место - {{ team.team.name }}</p>
                     </div>
-                    <div class="tm-rat_5_place">
-                        <div class="place_5_form"></div>
-                        <p class="place_5_title">5 место</p>
-                    </div>
-                    <div class="tm-rat_6_place">
-                        <div class="place_6_form"></div>
-                        <p class="place_6_title">6 место</p>
-                    </div>
-                    <div class="tm-rat_7_place">
-                        <div class="place_7_form"></div>
-                        <p class="place_7_title">7 место</p>
-                    </div>
-                    <div class="tm-rat_8_place">
-                        <div class="place_8_form"></div>
-                        <p class="place_8_title">8 место</p>
-                    </div>
-                    <div class="tm-rat_9_place">
-                        <div class="place_9_form"></div>
-                        <p class="place_9_title">9 место</p>
-                    </div>
-                    <div class="tm-rat_10_place">
-                        <div class="place_10_form"></div>
-                        <p class="place_10_title">10 место</p>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </section>
