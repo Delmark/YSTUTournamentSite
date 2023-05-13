@@ -14,38 +14,7 @@
 <body>
     <div class="flag" id="flag"></div>
 
-    <div class="regist_log">
-        <p class="reglog_close-btn" id="reglog_close-button">❯</p>
-        <div class="reglog_container">
-            <form class="registration">
-                <p class="reg_text">Регистрация</p>
-                <input class="reg_input" type="text" placeholder="Введите фамилию" name="last_name" required>
-
-                <input class="reg_input" type="text" placeholder="Введите имя" name="first_name" required>
-
-                <input class="reg_input" type="text" placeholder="Введите отчество (если имеется)" name="otchestvo">
-
-                <input class="reg_input" type="date" placeholder="Введите дату рождения" name="birth_date" required>
-
-                <input class="reg_input" type="email" placeholder="Введите электронную почту" name="email" required>
-
-                <input class="reg_input" type="text" placeholder="Введите логин" name="login" required>
-
-                <input class="reg_input" type="password" placeholder="Введите пароль" name="password" required>
-
-                <button class="reg_button" type="submit">Регистрация</button>
-            </form>
-            <div class="reg_line"></div>
-            <form class="log_in">
-                <p class="log_text">Вход</p>
-                <input class="log_input" type="text" placeholder="Введите логин" name="login" required>
-
-                <input class="log_input" type="password" placeholder="Введите пароль" name="password" required>
-
-                <button class="log_button" type="submit">Войти</button>
-            </form>
-        </div>
-    </div>
+    {% include 'login_registration.html' %}
 
     <header id="header">
         <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo" id="logo">
@@ -57,10 +26,22 @@
             <a href="archieve.html" class="archieve-link">Архив</a>
             <a href="contacts.html" class="contacts-link">Контакты</a>
         </div>
+        {% if not user.is_authenticated %}
         <div class="buttons">
             <p class="registration-btn" id="registration-button_header">Регистрация</p>
             <p class="logIn-btn" id="logIn-button_header">Войти</p>
         </div>
+        {% elif user.is_superuser %}
+        <div class="buttons">
+            <p class="registration-btn">Управление турниром</p>
+            <p class="logIn-btn">Выйти</p>
+        </div>
+        {% else %}
+        <div class="buttons">
+            <a class="registration-btn">Личный кабинет</a>
+            <a class="logIn-btn">Выйти</a>
+        </div>
+        {% endif %}
     </header>
 
     <main class="main">
