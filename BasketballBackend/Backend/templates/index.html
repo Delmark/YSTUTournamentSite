@@ -33,13 +33,13 @@
         </div>
         {% elif user.is_superuser %}
         <div class="buttons">
-            <p class="registration-btn">Управление турниром</p>
-            <p class="logIn-btn">Выйти</p>
+            <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
+            <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
         </div>
         {% else %}
         <div class="buttons">
-            <a class="registration-btn">Личный кабинет</a>
-            <a class="logIn-btn">Выйти</a>
+            <p class="registration-btn">Личный кабинет</a></p>
+            <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
         </div>
         {% endif %}
     </header>
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="slide">
-                <img src="{% static 'content/images/back-for-carousel.png' %}" alt="Photo 3" class="slide_photo fade">
+                <img src="{% static 'content/images/carousel_photo.png' %}" alt="Photo 3" class="slide_photo fade">
                 <div class="slide_text">
                     <p class="slide_text-box fade">Событие 3</p>
                 </div>
@@ -171,8 +171,16 @@
             <div class="link-buttons">
                 <a href="" class="mail-link">ПОЧТА@YSTU.RU</a>
                 <div class="btn-lnk">
-                    <p class="registration-btn" id="registration-button_footer">Регистрация</p>
-                    <p class="logIn-btn" id="logIn-button_footer">Войти</p>
+                    {% if not user.is_authenticated %}
+                        <p class="registration-btn" id="registration-button_footer">Регистрация</p>
+                        <p class="logIn-btn" id="logIn-button_footer">Войти</p>
+                    {% elif user.is_superuser %}
+                        <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
+                        <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+                    {% else %}
+                        <p class="registration-btn">Личный кабинет</a></p>
+                        <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+                    {% endif %}
                 </div>
             </div>
         </div>

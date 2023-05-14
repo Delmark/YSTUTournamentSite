@@ -695,6 +695,14 @@ main {
     background-color: #fbcb84;
 }
 
+.error-message {
+    color: #CE690E;
+    font-family: "DIN Pro Bold";
+    font-size: 20px;
+    margin: 5px 0;
+    text-align: center;
+}
+
 
 /* Footer */
 
@@ -790,3 +798,4 @@ footer .links .link-buttons .btn-lnk .logIn-btn:hover {
     background-color: #CE690E;
     color: #fff;
 }
+

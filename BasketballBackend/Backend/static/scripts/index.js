@@ -7,6 +7,7 @@ let logIn_btn_footer = document.querySelector("#logIn-button_footer");
 let flagDiv = document.querySelector("#flag");
 let header = document.querySelector("#header");
 
+
 reglog_close_btn.onclick = function() {
     flagDiv.classList.remove("openedRegLog");
 }

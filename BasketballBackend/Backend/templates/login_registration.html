@@ -1,14 +1,17 @@
 <div class="regist_log">
     <p class="reglog_close-btn" id="reglog_close-button">❯</p>
     <div class="reglog_container">
-        <form method="post" class="registration">
+        <form method="post" class="registration" action="{% url 'register' %}">
             {% csrf_token %}
             <p class="reg_text">Регистрация</p>
+            {% if register_error_message %}
+                <p class="error-message">{{ register_error_message }}</p>
+            {% endif %}
             <input class="reg_input" type="text" placeholder="Введите фамилию" name="last_name" required>
 
             <input class="reg_input" type="text" placeholder="Введите имя" name="first_name" required>
 
-            <input class="reg_input" type="text" placeholder="Введите отчество (если имеется)" name="otchestvo">
+            <input class="reg_input" type="text" placeholder="Введите отчество (если имеется)" name="middle_name">
 
             <input class="reg_input" type="date" placeholder="Введите дату рождения" name="birth_date" required>
 
@@ -21,9 +24,12 @@
             <button class="reg_button" type="submit">Регистрация</button>
         </form>
         <div class="reg_line"></div>
-        <form method="post" class="log_in">
+        <form method="post" class="log_in" action="{% url 'login' %}">
             {% csrf_token %}
             <p class="log_text">Вход</p>
+            {% if login_error_message %}
+                <p class="error-message">{{ login_error_message }}</p>
+            {% endif %}
             <input class="log_input" type="text" placeholder="Введите логин" name="username" required>
 
             <input class="log_input" type="password" placeholder="Введите пароль" name="password" required>
