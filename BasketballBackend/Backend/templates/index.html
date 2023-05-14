@@ -19,12 +19,12 @@
     <header id="header">
         <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo" id="logo">
         <div class="navigation">
-            <a href="index.html" class="main-link">Главная</a>
-            <a href="teams.html" class="teams-link">Команды</a>
-            <a href="schedule.html" class="timetable-link">Расписание</a>
-            <a href="results.html" class="results-link">Результаты</a>
-            <a href="archieve.html" class="archieve-link">Архив</a>
-            <a href="contacts.html" class="contacts-link">Контакты</a>
+            <a href="{% url 'index' %}" class="main-link">Главная</a>
+            <a href="{% url 'Teams:teams' %}" class="teams-link">Команды</a>
+            <a href="{% url 'Games:schedule' %}" class="timetable-link">Расписание</a>
+            <a href="{% url 'results' %}" class="results-link">Результаты</a>
+            <a href="{% url 'archieve' %} " class="archieve-link">Архив</a>
+            <a href="{% url 'contact' %}" class="contacts-link">Контакты</a>
         </div>
         {% if not user.is_authenticated %}
         <div class="buttons">
@@ -164,8 +164,8 @@
         <div class="links">
             <div class="link-str">
                 <a href="https://vk.com/ystu_physedu" target="_blank" class="vk-link"><i class='bx bxl-vk'></i></a>
-                <a href="docs.html" class="doc-link">Документация</a>
-                <a href="contacts.html" class="contact-link">Контакты</a>
+                <a href=" {% url 'docs' %} " class="doc-link">Документация</a>
+                <a href=" {% url 'contact' %} " class="contact-link">Контакты</a>
                 <a href="https://www.ystu.ru/" target="_blank" class="site-link">www.ystu.ru</a>
             </div>
             <div class="link-buttons">
