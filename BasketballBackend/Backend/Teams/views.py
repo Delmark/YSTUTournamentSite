@@ -11,6 +11,5 @@ def team_detail(request, team_id):
     team = get_object_or_404(Team, id=team_id)
     team_statistic = TeamStatistic.objects.get(team=team)
     players = team.player_set.all()
-    print(players, team_statistic)
     matches = team.team_1_matches.all() | team.team_2_matches.all()
     return render(request, 'team-pages/team-page.html', {'team': team, 'statistic': team_statistic, 'players': players, 'matches': matches})

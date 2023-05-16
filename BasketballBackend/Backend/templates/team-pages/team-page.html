@@ -109,13 +109,11 @@
                 {% for match in matches %}
                 <div class="match_card">
                     <div class="match_command_1">
-                        <div class="match_command_1-photo">
-                            {% if match.team_1.teamstatistic.logo %}
-                            <img src="{{ match.team_1.teamstatistic.logo.url }}" alt="{{ match.team_1.name }} logo">
-                            {% else %}
-                            <img src="{% static 'img/default_logo.png' %}" alt="{{ match.team_1.name }} logo">
-                            {% endif %}
-                        </div>
+                        {% if match.team_1.teamstatistic_set.first.logo %}
+                        <img class="match_command_1-photo" src="{{ match.team_1.teamstatistic_set.first.get_logo }}" alt="{{ match.team_1.name }} logo">
+                        {% else %}
+                        <img class="match_command_1-photo" src="{% static 'img/default_logo.png' %}" alt="{{ match.team_1.name }} logo">
+                        {% endif %}
                         <p class="match_command_1-name">{{ match.team_1.name }}</p>
                     </div>
                     <div class="match_info">
@@ -130,13 +128,11 @@
                     </div>
                     <div class="match_command_2">
                         <p class="match_command_2-name">{{ match.team_2.name }}</p>
-                        <div class="match_command_2-photo">
-                            {% if match.team_2.teamstatistic.logo %}
-                            <img src="{{ match.team_2.teamstatistic.logo.url }}" alt="{{ match.team_2.name }} logo">
+                            {% if match.team_2.teamstatistic_set.first.logo %}
+                            <img class="match_command_2-photo" src="{{ match.team_2.teamstatistic_set.first.get_logo }}" alt="{{ match.team_2.name }} logo">
                             {% else %}
-                            <img src="{% static 'image/default_logo.png' %}" alt="{{ match.team_2.name }} logo">
+                            <img class="match_command_2-photo" src="{% static 'image/default_logo.png' %}" alt="{{ match.team_2.name }} logo">
                             {% endif %}
-                        </div>
                     </div>
                 </div>
                 {% empty %}

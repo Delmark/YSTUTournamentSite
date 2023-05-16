@@ -50,7 +50,7 @@
         <div class="reglog_backgr"></div>
     
         <form action="" method="get" class="search_field">
-            <input type="search" name="search" placeholder="Введите название команды" value="{{ query }}">
+            <input type="search" name="search" placeholder="Введите название команды">
             <button type="submit" class="search_btn">
                 <i class='bx bx-search'></i>
             </button>
@@ -59,9 +59,7 @@
         <section class="comand_list">
             {% for team in teams %}
             <div class="comand_card">
-                <div class="comand_card-photo">
-                    <img src="{{ team.teamstatistic_set.get_logo.url }}" alt="Логотип не доступен :(">
-                </div>
+                <img class="comand_card-photo" src="{{ team.teamstatistic_set.first.get_logo }}" alt="Логотип не доступен :(">
                 <p class="comand_card-name">{{ team.name }}</p>
                 <a href="{% url 'Teams:team-detail' team.id %}" class="comand_card-link">❯</a>
             </div>
