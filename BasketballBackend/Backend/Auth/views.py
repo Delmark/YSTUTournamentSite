@@ -8,13 +8,11 @@ from Teams.models import TeamStatistic
 
 def register(request):
     if request.method == 'POST':
+        request.session['referer'] = request.META.get('HTTP_REFERER', 'News:index')
+        redirect_url = request.session.get('referer', 'News:index')
 
         if User.objects.filter(username=request.POST['username']).exists():
-            context = {'news': News.objects.order_by('pub_date')[:3],
-               'photos': Photo.objects.order_by('pub_date')[:6],
-               'teams': TeamStatistic.objects.order_by('rating').all(),
-               'register_error_message': 'Такой пользователь уже существует'}
-            return render(request, 'index.html', context)
+            return redirect(redirect_url + '?error=1')
 
         user = User.objects.create_user(
             username=request.POST['username'],
@@ -33,11 +31,14 @@ def register(request):
         user = authenticate(username=request.POST['username'], password=request.POST['password1'])
         login(request, user)
 
-        redirect_url = request.session.get('referer', 'index')
         return redirect(redirect_url)
 
 def login_view(request):
     if request.method == 'POST':
+        request.session['referer'] = request.META.get('HTTP_REFERER', 'News:index')
+        redirect_url = request.session.get('referer', 'News:index')
+
+
         username = request.POST['username']
         password = request.POST['password']
 
@@ -46,14 +47,9 @@ def login_view(request):
             login(request, user)
 
             
-            redirect_url = request.session.get('referer', 'index')
             return redirect(redirect_url)
         else:
-            context = {'news': News.objects.order_by('pub_date')[:3],
-               'photos': Photo.objects.order_by('pub_date')[:6],
-               'teams': TeamStatistic.objects.order_by('rating').all(),
-               'login_error_message': 'Неверный логин или пароль'}
-            return render(request, 'index.html', context)
+            return redirect(redirect_url + '?error=2')
 
 def logout_view(request): 
     logout(request)
