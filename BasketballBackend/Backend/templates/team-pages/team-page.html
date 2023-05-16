@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -5,275 +6,186 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="../css/teams/team-1.css">
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href=" {% static '/css/teams/team-1.css' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <title>Команды</title>
 </head>
 <body>
     <div class="flag openedStruct" id="flag"></div>
 
-    <div class="regist_log">
-        <p class="reglog_close-btn" id="reglog_close-button">❯</p>
-        <div class="reglog_container">
-            <form class="registration">
-                <p class="reg_text">Регистрация</p>
-                <input class="reg_input" type="text" placeholder="Введите фамилию" name="last_name" required>
-
-                <input class="reg_input" type="text" placeholder="Введите имя" name="first_name" required>
-
-                <input class="reg_input" type="text" placeholder="Введите отчество (если имеется)" name="otchestvo">
-
-                <input class="reg_input" type="date" placeholder="Введите дату рождения" name="birth_date" required>
-
-                <input class="reg_input" type="email" placeholder="Введите электронную почту" name="email" required>
-
-                <input class="reg_input" type="text" placeholder="Введите логин" name="login" required>
-
-                <input class="reg_input" type="password" placeholder="Введите пароль" name="password" required>
-
-                <button class="reg_button" type="submit">Регистрация</button>
-            </form>
-            <div class="reg_line"></div>
-            <form class="log_in">
-                <p class="log_text">Вход</p>
-                <input class="log_input" type="text" placeholder="Введите логин" name="login" required>
-
-                <input class="log_input" type="password" placeholder="Введите пароль" name="password" required>
-
-                <button class="log_button" type="submit">Войти</button>
-            </form>
-        </div>
-    </div>
+    {% include 'login_registration.html' %}
 
     <header id="header">
-        <img src="../content/images/logo.png" alt="Лого сайта" class="logo" id="logo">
+        <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo" id="logo">
         <div class="navigation">
-            <a href="../index.html" class="main-link">Главная</a>
-            <a href="../teams.html" class="teams-link">Команды</a>
-            <a href="../schedule.html" class="timetable-link">Расписание</a>
-            <a href="../results.html" class="results-link">Результаты</a>
-            <a href="../archieve.html" class="archieve-link">Архив</a>
-            <a href="../contacts.html" class="contacts-link">Контакты</a>
+            <a href="{% url 'index' %}" class="main-link">Главная</a>
+            <a href="{% url 'Teams:teams' %}" class="teams-link">Команды</a>
+            <a href="{% url 'Games:schedule' %}" class="timetable-link">Расписание</a>
+            <a href="{% url 'results' %}" class="results-link">Результаты</a>
+            <a href="{% url 'archieve' %} " class="archieve-link">Архив</a>
+            <a href="{% url 'contact' %}" class="contacts-link">Контакты</a>
         </div>
+        {% if not user.is_authenticated %}
         <div class="buttons">
             <p class="registration-btn" id="registration-button_header">Регистрация</p>
             <p class="logIn-btn" id="logIn-button_header">Войти</p>
         </div>
+        {% elif user.is_superuser %}
+        <div class="buttons">
+            <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
+            <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+        </div>
+        {% else %}
+        <div class="buttons">
+            <p class="registration-btn">Личный кабинет</a></p>
+            <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+        </div>
+        {% endif %}
     </header>
 
     <main class="main">
         <div class="reglog_backgr"></div>
-
+    
         <section class="comand_table">
-            <a href="../teams.html" class="comand_table-link">❮</a>
-            <p class="comand_table-name">Команда 1</p>
-            <div class="comand_table-photo"></div>
+            <a href="{% url 'Teams:teams' %}" class="comand_table-link">❮</a>
+            <p class="comand_table-name">{{ team.name }}</p>
+            <div class="comand_table-photo">
+                <img src="{{ team.teamstatistic_set.get_logo }}" alt="Логотип временно не доступен :(">
+            </div>
         </section>
-
+    
         <section class="bar">
             <p class="team_struct" id="team_struct">Состав команды</p>
             <p class="match_sched" id="match_sched">Расписание</p>
             <p class="team_static" id="team_static">Статистика</p>
         </section>
-
-        <section class="team_structure">
+    
+        <section class="team_structure openedStruct" id="flagDiv">
             <p class="team_struct-title">Состав команды</p>
             <div class="team_struct-form">
                 <div class="players">
+                    {% for player in players %}
                     <div class="person_card">
-                        <div class="person_card-photo"></div>
-                        <p class="person_card-name">Фамилия Имя</p>
-                        <p class="person_card-position">Позиция</p>
+                        <div class="person_card-photo">
+                            {% if player.photo %}
+                            <img src="{{ player.photo.url }}" alt="{{ player.get_full_name }}">
+                            {% else %}
+                            <img src="{% static 'image/placeholder.png' %}" alt="{{ player.get_full_name }}">
+                            {% endif %}
+                        </div>
+                        <p class="person_card-name">{{ player.get_full_name }}</p>
                         <div class="person_card-date">
-                            Дата рождения: <p class="person_card-date_birth">00.00.0000</p>
+                            Дата рождения: <p class="person_card-date_birth">{{ player.birth_date }}</p>
                         </div>
                         <div class="person_card-height">
-                            Рост: <p class="person_card-height_txt"> 185 см</p>
+                            Рост: <p class="person_card-height_txt">{{ player.height }} см</p>
                         </div>
                     </div>
-                    <div class="person_card">
-                        <div class="person_card-photo"></div>
-                        <p class="person_card-name">Фамилия Имя</p>
-                        <p class="person_card-position">Позиция</p>
-                        <div class="person_card-date">
-                            Дата рождения: 
-                            <p class="person_card-date_birth">00.00.0000</p>
-                        </div>
-                        <div class="person_card-height">
-                            Рост: 
-                            <p class="person_card-height_txt"> 185 см</p>
-                        </div>
-                    </div>
-                    <div class="person_card">
-                        <div class="person_card-photo"></div>
-                        <p class="person_card-name">Фамилия Имя</p>
-                        <p class="person_card-position">Позиция</p>
-                        <div class="person_card-date">
-                            Дата рождения: 
-                            <p class="person_card-date_birth">00.00.0000</p>
-                        </div>
-                        <div class="person_card-height">
-                            Рост: 
-                            <p class="person_card-height_txt"> 185 см</p>
-                        </div>
-                    </div>
-                    <div class="person_card">
-                        <div class="person_card-photo"></div>
-                        <p class="person_card-name">Фамилия Имя</p>
-                        <p class="person_card-position">Позиция</p>
-                        <div class="person_card-date">
-                            Дата рождения: 
-                            <p class="person_card-date_birth">00.00.0000</p>
-                        </div>
-                        <div class="person_card-height">
-                            Рост: 
-                            <p class="person_card-height_txt"> 185 см</p>
-                        </div>
-                    </div>
-                    <div class="person_card">
-                        <div class="person_card-photo"></div>
-                        <p class="person_card-name">Фамилия Имя</p>
-                        <p class="person_card-position">Позиция</p>
-                        <div class="person_card-date">
-                            Дата рождения: 
-                            <p class="person_card-date_birth">00.00.0000</p>
-                        </div>
-                        <div class="person_card-height">
-                            Рост: 
-                            <p class="person_card-height_txt"> 185 см</p>
-                        </div>
-                    </div>
-                    <div class="person_card">
-                        <div class="person_card-photo"></div>
-                        <p class="person_card-name">Фамилия Имя</p>
-                        <p class="person_card-position">Позиция</p>
-                        <div class="person_card-date">
-                            Дата рождения: 
-                            <p class="person_card-date_birth">00.00.0000</p>
-                        </div>
-                        <div class="person_card-height">
-                            Рост: 
-                            <p class="person_card-height_txt"> 185 см</p>
-                        </div>
-                    </div>
-                    <div class="person_card">
-                        <div class="person_card-photo"></div>
-                        <p class="person_card-name">Фамилия Имя</p>
-                        <p class="person_card-position">Позиция</p>
-                        <div class="person_card-date">
-                            Дата рождения: 
-                            <p class="person_card-date_birth">00.00.0000</p>
-                        </div>
-                        <div class="person_card-height">
-                            Рост: 
-                            <p class="person_card-height_txt"> 185 см</p>
-                        </div>
-                    </div>
-                    <div class="person_card">
-                        <div class="person_card-photo"></div>
-                        <p class="person_card-name">Фамилия Имя</p>
-                        <p class="person_card-position">Позиция</p>
-                        <div class="person_card-date">
-                            Дата рождения: 
-                            <p class="person_card-date_birth">00.00.0000</p>
-                        </div>
-                        <div class="person_card-height">
-                            Рост: 
-                            <p class="person_card-height_txt"> 185 см</p>
-                        </div>
-                    </div>
+                    {% empty %}
+                    <p>Состав команды пока не заполнен</p>
+                    {% endfor %}
                 </div>
                 <div class="trainer">
+                    {% if false %}
                     <div class="person_card">
-                        <div class="person_card-photo"></div>
-                        <p class="person_card-name">Фамилия Имя</p>
-                        <p class="person_card-position">Позиция</p>
+                        <div class="person_card-photo">
+                        </div>
+                        <p class="person_card-name">Имя тренера</p>
+                        <p class="person_card-position">Тренер</p>
                     </div>
+                    {% else %}
+                    <p>Тренер команды не указан</p>
+                    {% endif %}
                 </div>
             </div>
         </section>
-
-        <section class="match_schedule">
+    
+        <section class="match_schedule" id="flagDiv">
             <p class="match-sched-title">Расписание</p>
             <div class="match-sched-form">
+                {% for match in matches %}
                 <div class="match_card">
                     <div class="match_command_1">
-                        <div class="match_command_1-photo"></div>
-                        <p class="match_command_1-name">Команда 1</p>
+                        <div class="match_command_1-photo">
+                            {% if match.team_1.teamstatistic.logo %}
+                            <img src="{{ match.team_1.teamstatistic.logo.url }}" alt="{{ match.team_1.name }} logo">
+                            {% else %}
+                            <img src="{% static 'img/default_logo.png' %}" alt="{{ match.team_1.name }} logo">
+                            {% endif %}
+                        </div>
+                        <p class="match_command_1-name">{{ match.team_1.name }}</p>
                     </div>
                     <div class="match_info">
-                        <p class="match_date">00.00.0000</p>
-                        <p class="match_place">СП Место</p>
-                        <p class="match-season">Сезон 1</p>
-                        <p class="match_score">0:0</p>
+                        <p class="match_date">{{ match.date }} - {{match.time}}</p>
+                        <p class="match_place">{{ match.place }}</p>
+                        <p class="match-season">Сезон {{ match.season }}</p>
+                        {% if match.is_finished %}
+                        <p class="match_score">{{ match.team_1_goals }}:{{ match.team_2_goals }}</p>
+                        {% else %}
+                        <p class="match_score">-</p>
+                        {% endif %}
                     </div>
                     <div class="match_command_2">
-                        <p class="match_command_2-name">Команда 2</p>
-                        <div class="match_command_2-photo"></div>
+                        <p class="match_command_2-name">{{ match.team_2.name }}</p>
+                        <div class="match_command_2-photo">
+                            {% if match.team_2.teamstatistic.logo %}
+                            <img src="{{ match.team_2.teamstatistic.logo.url }}" alt="{{ match.team_2.name }} logo">
+                            {% else %}
+                            <img src="{% static 'image/default_logo.png' %}" alt="{{ match.team_2.name }} logo">
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-                <div class="match_card">
-                    <div class="match_command_1">
-                        <div class="match_command_1-photo"></div>
-                        <p class="match_command_1-name">Команда 1</p>
-                    </div>
-                    <div class="match_info">
-                        <p class="match_date">00.00.0000</p>
-                        <p class="match_place">СП Место</p>
-                        <p class="match-season">Сезон 1</p>
-                        <p class="match_score">0:0</p>
-                    </div>
-                    <div class="match_command_2">
-                        <p class="match_command_2-name">Команда 2</p>
-                        <div class="match_command_2-photo"></div>
-                    </div>
-                </div>
-                <div class="match_card">
-                    <div class="match_command_1">
-                        <div class="match_command_1-photo"></div>
-                        <p class="match_command_1-name">Команда 1</p>
-                    </div>
-                    <div class="match_info">
-                        <p class="match_date">00.00.0000</p>
-                        <p class="match_place">СП Место</p>
-                        <p class="match-season">Сезон 1</p>
-                        <p class="match_score">0:0</p>
-                    </div>
-                    <div class="match_command_2">
-                        <p class="match_command_2-name">Команда 2</p>
-                        <div class="match_command_2-photo"></div>
-                    </div>
-                </div>
+                {% empty %}
+                <p>Расписание матчей пока не заполнено</p>
+                {% endfor %}
             </div>
         </section>
-
-        <section class="team_statistic">
+    
+        <section class="team_statistic" id="flagDiv">
             <p class="team_static-title">Статистика</p>
-            <div class="team_static-form"></div>
+            <div class="team_static-form">
+                <p>Сыграно игр: {{ statistic.played_games }}</p>
+                <p>Победы: {{ statistic.wins }}</p>
+                <p>Ничьи: {{ statistic.draws }}</p>
+                <p>Поражения: {{ statistic.losses }}</p>
+                <p>Процент побед: {{ statistic.win_percentage|floatformat }}%</p>
+                {% if players %}
+                <p>Количество игроков: {{ players.count }}</p>
+                {% endif %}
+            </div>
         </section>
-
+    
     </main>
 
     <footer>
-        <img src="../content/images/logo.png" alt="Лого сайта" class="logo">
+        <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
         <div class="links">
             <div class="link-str">
                 <a href="https://vk.com/ystu_physedu" target="_blank" class="vk-link"><i class='bx bxl-vk'></i></a>
-                <a href="../docs.html" class="doc-link">Документация</a>
-                <a href="../contacts.html" class="contact-link">Контакты</a>
+                <a href=" {% url 'docs' %} " class="doc-link">Документация</a>
+                <a href=" {% url 'contact' %} " class="contact-link">Контакты</a>
                 <a href="https://www.ystu.ru/" target="_blank" class="site-link">www.ystu.ru</a>
             </div>
             <div class="link-buttons">
                 <a href="" class="mail-link">ПОЧТА@YSTU.RU</a>
                 <div class="btn-lnk">
-                    <p class="registration-btn" id="registration-button_footer">Регистрация</p>
-                    <p class="logIn-btn" id="logIn-button_footer">Войти</p>
+                    {% if not user.is_authenticated %}
+                        <p class="registration-btn" id="registration-button_footer">Регистрация</p>
+                        <p class="logIn-btn" id="logIn-button_footer">Войти</p>
+                    {% elif user.is_superuser %}
+                        <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
+                        <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+                    {% else %}
+                        <p class="registration-btn">Личный кабинет</a></p>
+                        <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="../scripts/teams/team-1.js"></script>
+    <script src="{% static 'scripts/teams/team-1.js' %}"></script>
 </body>
 </html>

@@ -46,36 +46,27 @@
 
     <main class="main">
         <div class="reglog_backgr"></div>
-
+    
         <form action="" method="get" class="search_field">
-            <input type="search" name="search" placeholder="Введите название команды">
+            <input type="search" name="search" placeholder="Введите название команды" value="{{ query }}">
             <button type="submit" class="search_btn">
                 <i class='bx bx-search'></i>
             </button>
-            <button type="menu" class="search_filter">
-                <i class='bx bx-filter-alt' ></i> Фильтр
-            </button>
         </form>
-
+    
         <section class="comand_list">
+            {% for team in teams %}
             <div class="comand_card">
-                <div class="comand_card-photo"></div>
-                <p class="comand_card-name">Команда 1</p>
-                <a href="team-pages/team-1.html" class="comand_card-link">❯</a>
+                <div class="comand_card-photo">
+                    <img src="{{ team.teamstatistic_set.get_logo.url }}" alt="Логотип не доступен :(">
+                </div>
+                <p class="comand_card-name">{{ team.name }}</p>
+                <a href="{% url 'Teams:team-detail' team.id %}" class="comand_card-link">❯</a>
             </div>
-            <div class="comand_card">
-                <div class="comand_card-photo"></div>
-                <p class="comand_card-name">Команда 2</p>
-                <a href="" class="comand_card-link">❯</a>
-            </div>
-            <div class="comand_card">
-                <div class="comand_card-photo"></div>
-                <p class="comand_card-name">Команда 3</p>
-                <a href="" class="comand_card-link">❯</a>
-            </div>
+            {% empty %}
+            <h2>Команды не найдены</h2>
+            {% endfor %}
         </section>
-
-    </main>
 
     <footer>
         <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">

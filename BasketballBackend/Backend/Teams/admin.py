@@ -1,14 +1,10 @@
 from django.contrib import admin
 from .models import Team, TeamStatistic, Player
 
-class PlayerInline(admin.TabularInline):
-    model = TeamStatistic.players.through
-    extra = 1
 
 @admin.register(TeamStatistic)
 class TeamStatisticAdmin(admin.ModelAdmin):
     list_display = ('team', 'played_games', 'wins', 'draws', 'losses', 'win_percentage')
-    inlines = [PlayerInline]
 
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
