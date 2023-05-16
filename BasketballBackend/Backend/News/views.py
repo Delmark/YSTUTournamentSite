@@ -1,11 +1,13 @@
-from django.shortcuts import render
-from .models import News, Photo
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import NewsCreateForm, ArticleImageForm, ArticleImageFormset
+from .models import News, Photo, ArticleImage
 from Teams.models import TeamStatistic
 
 def index(request):
     print(request.GET)
-    news = News.objects.order_by('pub_date')[:3]
-    photo = Photo.objects.order_by('pub_date')[:6]
+    news = News.objects.order_by('-pub_date')[:3]
+    photo = Photo.objects.order_by('-pub_date')[:6]
     teams = TeamStatistic.objects.order_by('rating').all()
 
     context = {'news': news,
@@ -22,6 +24,32 @@ def index(request):
             return render(request, 'index.html', context)
     else:
         return render(request, 'index.html', context)
+
+@user_passes_test(lambda user: user.is_superuser)
+def create_news(request):
+    form = NewsCreateForm()
+    formset = ArticleImageFormset()
+    if request.method == 'POST':
+        form = NewsCreateForm(request.POST, request.FILES)
+        formset = ArticleImageFormset(request.POST, request.FILES)
+        if form.is_valid() and formset.is_valid():
+            news = form.save()
+            for form in formset:
+                if form.cleaned_data.get('image'):
+                    ArticleImage.objects.create(article=news, image=form.cleaned_data.get('image'))
+            return redirect('detail-article', pk=news.pk)
+    print(formset)
+    return render(request, 'news/create-article.html', {'form': form, 'formset': formset})
+
+def news_detail(request, pk):
+    news = get_object_or_404(News, pk=pk)
+    images = news.images.all()
+    return render(request, 'news/detail-article.html', {'news': news, 'images': images})
+
+def all_news(request):
+    news = News.objects.order_by('-pub_date')[:3]
+    context = {'news': news}
+    return render(request, 'news/news-page.html', context)
 
 def contacts(request):
     return render(request, 'contacts.html')

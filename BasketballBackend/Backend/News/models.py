@@ -16,6 +16,13 @@ class News(models.Model):
 
     def __str__(self) -> str:
         return self.title
+    
+class ArticleImage(models.Model):
+    article = models.ForeignKey(News, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='article_images/')
+
+    def __str__(self):
+        return self.article.title
 
 class Photo(models.Model):
     title = models.CharField(verbose_name='Заголовок', max_length=255)

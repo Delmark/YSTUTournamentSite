@@ -103,11 +103,11 @@
         </section>
 
         <section class="news">
-            <p class="news_title">Новости</p>
+            <p class="news_title"><a href="{% url 'news' %}">Новости</a></p>
             {% for article in news %}
             <div class="news_card">
                 <div class="news_card-textbox">
-                    <p class="news_card-title">{{article.title}}</p>
+                    <p class="news_card-title"><a href="{% url 'detail-article' pk=article.pk %}">{{article.title}}</a></p>
                     <p class="news_card-text">{{article.short_desc}}</p>
                     <p class="news_card-date">{{article.pub_date}}</p>
                 </div>

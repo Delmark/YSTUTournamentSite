@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <title>Главная</title>
+</head>
+<body>
+    <div class="flag" id="flag"></div>
+
+    {% include 'login_registration.html' %}
+
+    <header id="header">
+        <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo" id="logo">
+        <div class="navigation">
+            <a href="{% url 'index' %}" class="main-link">Главная</a>
+            <a href="{% url 'Teams:teams' %}" class="teams-link">Команды</a>
+            <a href="{% url 'Games:schedule' %}" class="timetable-link">Расписание</a>
+            <a href="{% url 'results' %}" class="results-link">Результаты</a>
+            <a href="{% url 'archieve' %} " class="archieve-link">Архив</a>
+            <a href="{% url 'contact' %}" class="contacts-link">Контакты</a>
+        </div>
+        {% if not user.is_authenticated %}
+        <div class="buttons">
+            <p class="registration-btn" id="registration-button_header">Регистрация</p>
+            <p class="logIn-btn" id="logIn-button_header">Войти</p>
+        </div>
+        {% elif user.is_superuser %}
+        <div class="buttons">
+            <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
+            <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+        </div>
+        {% else %}
+        <div class="buttons">
+            <p class="registration-btn">Личный кабинет</a></p>
+            <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+        </div>
+        {% endif %}
+    </header>
+
+    <main class="main">
+        <div class="reglog_backgr"></div>
+
+        <h1>{{ news.title }}</h1>
+        <p>{{ news.short_desc }}</p>
+        <p>{{ news.content }}</p>
+      
+        {% if images %}
+            <h2>Изображения:</h2>
+            {% for image in images %}
+            <img src="{{ image.image.url }}" alt="{{ news.title }}" />
+            {% endfor %}
+        {% elif news.thumbnail %}
+            <p><img src="{{ news.thumbnail.url }}" alt="{{ news.title }}" /></p>
+        {% endif %}
+
+    </main>
+
+    <footer>
+        <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
+        <div class="links">
+            <div class="link-str">
+                <a href="https://vk.com/ystu_physedu" target="_blank" class="vk-link"><i class='bx bxl-vk'></i></a>
+                <a href=" {% url 'docs' %} " class="doc-link">Документация</a>
+                <a href=" {% url 'contact' %} " class="contact-link">Контакты</a>
+                <a href="https://www.ystu.ru/" target="_blank" class="site-link">www.ystu.ru</a>
+            </div>
+            <div class="link-buttons">
+                <a href="" class="mail-link">ПОЧТА@YSTU.RU</a>
+                <div class="btn-lnk">
+                    {% if not user.is_authenticated %}
+                        <p class="registration-btn" id="registration-button_footer">Регистрация</p>
+                        <p class="logIn-btn" id="logIn-button_footer">Войти</p>
+                    {% elif user.is_superuser %}
+                        <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
+                        <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+                    {% else %}
+                        <p class="registration-btn">Личный кабинет</a></p>
+                        <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'scripts/index.js' %}"></script>
+</body>
+</html>
