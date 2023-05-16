@@ -123,9 +123,9 @@
                         <p class="match_place">{{ match.place }}</p>
                         <p class="match-season">Сезон {{ match.season }}</p>
                         {% if match.is_finished %}
-                        <p class="match_score">{{ match.team_1_goals }}:{{ match.team_2_goals }}</p>
+                        <p class="match_score">{{ match.team_1_goals}}:{{ match.team_2_goals }}</p>
                         {% else %}
-                        <p class="match_score">-</p>
+                        <p class="match_score">{{ match.team_1_goals}}:{{ match.team_2_goals }}</p>
                         {% endif %}
                     </div>
                     <div class="match_command_2">
