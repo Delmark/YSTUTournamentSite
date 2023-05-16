@@ -1,10 +1,8 @@
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.urls import reverse
 from .models import UserProfile, User
-
-from News.models import News, Photo
-from Teams.models import TeamStatistic
+from urllib.parse import urlencode, urlparse
 
 def register(request):
     if request.method == 'POST':
@@ -12,7 +10,9 @@ def register(request):
         redirect_url = request.session.get('referer', 'News:index')
 
         if User.objects.filter(username=request.POST['username']).exists():
-            return redirect(redirect_url + '?error=1')
+            params = {'error': 1}
+            url = redirect_url + '?' + urlencode(params)
+            return redirect(url)
 
         user = User.objects.create_user(
             username=request.POST['username'],
@@ -46,12 +46,14 @@ def login_view(request):
         if user is not None:
             login(request, user)
 
-            
             return redirect(redirect_url)
         else:
-            return redirect(redirect_url + '?error=2')
+            params = {'error': 2}
+            url = redirect_url + '?' + urlencode(params)
+            return redirect(url)
 
 def logout_view(request): 
     logout(request)
+    request.session['referer'] = request.META.get('HTTP_REFERER', 'News:index')
     redirect_url = request.session.get('referer', 'index')
     return redirect(redirect_url)
