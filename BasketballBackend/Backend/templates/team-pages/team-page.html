@@ -144,14 +144,12 @@
         <section class="team_statistic" id="flagDiv">
             <p class="team_static-title">Статистика</p>
             <div class="team_static-form">
-                <p>Сыграно игр: {{ statistic.played_games }}</p>
-                <p>Победы: {{ statistic.wins }}</p>
-                <p>Ничьи: {{ statistic.draws }}</p>
-                <p>Поражения: {{ statistic.losses }}</p>
-                <p>Процент побед: {{ statistic.win_percentage|floatformat }}%</p>
-                {% if players %}
-                <p>Количество игроков: {{ players.count }}</p>
-                {% endif %}
+                    <p>Сыграно игр: {{ statistic.played_games }}</p>
+                    <p>Победы: {{ statistic.wins }}</p>
+                    <p>Ничьи: {{ statistic.draws }}</p>
+                    <p>Поражения: {{ statistic.losses }}</p>
+                    <p>Процент побед: {{ statistic.win_percentage|floatformat }}%</p>
+                    <p>Количество игроков: {{ players.count }}</p>
             </div>
         </section>
     
