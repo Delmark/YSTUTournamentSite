@@ -60,6 +60,10 @@
             <p><img src="{{ news.thumbnail.url }}" alt="{{ news.title }}" /></p>
         {% endif %}
 
+        {% if user.is_superuser %}
+            <a href='{% url 'delete-article' pk=news.pk %}'>Удалить новость</a>
+        {% endif %}
+
     </main>
 
     <footer>

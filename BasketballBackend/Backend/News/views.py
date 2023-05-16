@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from .forms import NewsCreateForm, ArticleImageForm, ArticleImageFormset
 from .models import News, Photo, ArticleImage
 from Teams.models import TeamStatistic
@@ -41,6 +42,12 @@ def create_news(request):
     print(formset)
     return render(request, 'news/create-article.html', {'form': form, 'formset': formset})
 
+@user_passes_test(lambda user: user.is_superuser)
+def delete_news(request, pk):
+    news = get_object_or_404(News, pk=pk)
+    news.delete()
+    return redirect(reverse('news'))
+
 def news_detail(request, pk):
     news = get_object_or_404(News, pk=pk)
     images = news.images.all()
@@ -50,6 +57,7 @@ def all_news(request):
     news = News.objects.order_by('-pub_date')[:3]
     context = {'news': news}
     return render(request, 'news/news-page.html', context)
+
 
 def contacts(request):
     return render(request, 'contacts.html')
