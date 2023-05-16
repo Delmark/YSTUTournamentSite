@@ -6,7 +6,6 @@ from .models import News, Photo, ArticleImage
 from Teams.models import TeamStatistic
 
 def index(request):
-    print(request.GET)
     news = News.objects.order_by('-pub_date')[:3]
     photo = Photo.objects.order_by('-pub_date')[:6]
     teams = TeamStatistic.objects.order_by('rating').all()
@@ -39,7 +38,6 @@ def create_news(request):
                 if form.cleaned_data.get('image'):
                     ArticleImage.objects.create(article=news, image=form.cleaned_data.get('image'))
             return redirect('detail-article', pk=news.pk)
-    print(formset)
     return render(request, 'news/create-article.html', {'form': form, 'formset': formset})
 
 @user_passes_test(lambda user: user.is_superuser)
@@ -55,8 +53,7 @@ def news_detail(request, pk):
 
 def all_news(request):
     news = News.objects.order_by('-pub_date')[:3]
-    context = {'news': news}
-    return render(request, 'news/news-page.html', context)
+    return render(request, 'news/news-page.html', {'news': news})
 
 
 def contacts(request):
