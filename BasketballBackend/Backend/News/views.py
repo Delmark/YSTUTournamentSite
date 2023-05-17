@@ -64,6 +64,3 @@ def docs(request):
 
 def results(request):
     return render(request, 'results.html')
-
-def archieve(request):
-    return render(request, 'archieve.html')

@@ -23,7 +23,7 @@
             <a href="{% url 'Teams:teams' %}" class="teams-link">Команды</a>
             <a href="{% url 'Games:schedule' %}" class="timetable-link">Расписание</a>
             <a href="{% url 'results' %}" class="results-link">Результаты</a>
-            <a href="{% url 'archieve' %} " class="archieve-link">Архив</a>
+            <a href="{% url 'Games:archieve' %} " class="archieve-link">Архив</a>
             <a href="{% url 'contact' %}" class="contacts-link">Контакты</a>
         </div>
         {% if not user.is_authenticated %}
@@ -50,57 +50,58 @@
         <div class="reglog_backgr"></div>
 
         <form class="lists">
-            <select class="period_list" name="period" id="tournm_period" required>
-                <option value="">Выберите период турнира</option>
-                <option value="Period 1">Период 1</option>
-                <option value="Period 2">Период 2</option>
-                <option value="Period 3">Период 3</option>
+            <select class="period_list" name="season">
+                <option value="">Все сезоны</option>
+                <option value="1">Сезон 1</option>
+                <option value="2">Сезон 2</option>
             </select>
-
-            <select class="match_list" name="match" id="tournm_match" required>
+    
+            <select class="match_list" name="match">
                 <option value="">Выберите матч</option>
-                <option value="Match 1">Матч 1</option>
-                <option value="Match 2">Матч 2</option>
-                <option value="Match 3">Матч 3</option>
+                {% for match in matches %}
+                    <option value="{{ match.id }}">{{ match }}</option>
+                {% endfor %}
             </select>
+    
+            <button type="submit">Фильтровать</button>
         </form>
-
-        <p class="match_title">Матч</p>
-        <div class="match_card">
-            <div class="match_command_1">
-                <div class="match_command_1-photo"></div>
-                <p class="match_command_1-name">Команда 1</p>
-            </div>
-            <div class="match_info">
-                <p class="match_date">00.00.0000</p>
-                <p class="match_place">СП Место</p>
-                <p class="match-season">Сезон 1</p>
-                <p class="match_score">0:0</p>
-            </div>
-            <div class="match_command_2">
-                <p class="match_command_2-name">Команда 2</p>
-                <div class="match_command_2-photo"></div>
-            </div>
-        </div>
-        <div class="match_card">
-            <div class="match_command_1">
-                <div class="match_command_1-photo"></div>
-                <p class="match_command_1-name">Команда 1</p>
-            </div>
-            <div class="match_info">
-                <p class="match_date">00.00.0000</p>
-                <p class="match_place">СП Место</p>
-                <p class="match-season">Сезон 1</p>
-                <p class="match_score">0:0</p>
-            </div>
-            <div class="match_command_2">
-                <p class="match_command_2-name">Команда 2</p>
-                <div class="match_command_2-photo"></div>
-            </div>
+    
+        <div class="match_cards">
+            {% for match in matches %}
+                <div class="match_card">
+                    <div class="match_command_1">
+                        <img src="{{ match.team_1.teamstatistic_set.first.get_logo }}" alt="{{ match.team_1 }}">
+                        <p class="match_command_1-name">{{ match.team_1 }}</p>
+                    </div>
+                    <div class="match_info">
+                        <p class="match_date">{{ match.date }}</p>
+                        <p class="match_place">{{ match.place }}</p>
+                        <p class="match-season">Сезон {{ match.season }}</p>
+                        <p class="match_score">{{ match.team_1_goals }}:{{ match.team_2_goals }}</p>
+                    </div>
+                    <div class="match_command_2">
+                        <p class="match_command_2-name">{{ match.team_2 }}</p>
+                        <img class="match_command_2-photo" src="{{ match.team_2.teamstatistic_set.first.get_logo }}" alt="{{ match.team_2 }}">
+                    </div>
+                </div>
+            {% endfor %}
         </div>
 
         <p class="scores_title">Статистика</p>
-        <div class="scores_form"></div>
+        <div class="scores_form">
+            {% for team_stat in team_statistics %}
+            <div class="team_statistic">
+                <div class="team_info">
+                    <p class="team_name">Название команды: {{ team_stat.team }}</p>
+                    <p class="team_rating">Рейтинг команды: {{ team_stat.rating }}</p>
+                    <p class="team_played_games">Сыграно игр: {{ team_stat.played_games }}</p>
+                    <p class="team_wins">Победы команды: {{ team_stat.wins }}</p>
+                    <p class="team_draws">Ничьи команды: {{ team_stat.draws }}</p>
+                    <p class="team_losses">Проигрыши команды: {{ team_stat.losses }}</p>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
     </main>
 
     <footer>
