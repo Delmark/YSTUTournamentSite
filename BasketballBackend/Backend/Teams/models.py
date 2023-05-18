@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import FileExtensionValidator
+from Auth.models import UserProfile
 
 class Team(models.Model):
     name = models.CharField(verbose_name="Название команды", max_length=120, unique=True)
@@ -14,6 +15,8 @@ class Player(models.Model):
     last_name = models.CharField(verbose_name="Фамилия", max_length=120)
     middle_name = models.CharField(verbose_name="Отчество", blank=True, null=True, max_length=120)
     photo = models.ImageField(verbose_name='Фото игрока', blank=True, upload_to='player_photos/', validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'webp', 'jpeg', 'gif'))])
+    user_profile = models.ForeignKey(UserProfile, related_name='players', on_delete=models.SET_NULL, null=True, blank=True)
+    height = models.PositiveIntegerField(verbose_name="Рост", blank=True, null=True)
 
     def __str__(self):
         return f"{self.last_name} {self.name} {self.middle_name or ''}"
@@ -23,6 +26,10 @@ class Player(models.Model):
         if not self.photo:
             return 'media/images/placeholder.png'
         return self.photo.url
+    
+    @property
+    def get_full_name(self):
+        return f'{self.last_name} {self.name}'
 
 class TeamStatistic(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
@@ -32,7 +39,6 @@ class TeamStatistic(models.Model):
     wins = models.IntegerField(verbose_name="Победы", default=0, blank=True)
     draws = models.IntegerField(verbose_name="Ничьи", default=0, blank=True)
     losses = models.IntegerField(verbose_name="Поражения", default=0, blank=True)
-    players = models.ManyToManyField(Player,blank=True)
 
     @property
     def get_logo(self):

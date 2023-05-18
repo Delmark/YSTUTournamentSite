@@ -23,7 +23,7 @@
             <a href="{% url 'Teams:teams' %}" class="teams-link">Команды</a>
             <a href="{% url 'Games:schedule' %}" class="timetable-link">Расписание</a>
             <a href="{% url 'results' %}" class="results-link">Результаты</a>
-            <a href="{% url 'archieve' %} " class="archieve-link">Архив</a>
+            <a href="{% url 'Games:archieve' %} " class="archieve-link">Архив</a>
             <a href="{% url 'contact' %}" class="contacts-link">Контакты</a>
         </div>
         {% if not user.is_authenticated %}
@@ -33,11 +33,13 @@
         </div>
         {% elif user.is_superuser %}
         <div class="buttons">
+            <div class="registration-btn" id="registration-button_header" style="display:none;"></div><div class="logIn-btn" id="logIn-button_header" style="display:none;"></div>
             <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
             <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
         </div>
         {% else %}
         <div class="buttons">
+            <div class="registration-btn" id="registration-button_header" style="display:none;"></div><div class="logIn-btn" id="logIn-button_header" style="display:none;"></div>
             <p class="registration-btn">Личный кабинет</a></p>
             <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
         </div>
@@ -91,9 +93,11 @@
                         <p class="registration-btn" id="registration-button_footer">Регистрация</p>
                         <p class="logIn-btn" id="logIn-button_footer">Войти</p>
                     {% elif user.is_superuser %}
+                    <div class="registration-btn" id="registration-button_footer" style="display:none;"></div><div class="logIn-btn" id="logIn-button_footer" style="display:none;"></div>
                         <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
                         <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
                     {% else %}
+                    <div class="registration-btn" id="registration-button_footer" style="display:none;"></div><div class="logIn-btn" id="logIn-button_footer" style="display:none;"></div>
                         <p class="registration-btn">Личный кабинет</a></p>
                         <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
                     {% endif %}
@@ -103,5 +107,6 @@
     </footer>
 
     <script src=" {% static 'scripts/docs.js' %}"></script>
+    <script src="{% static 'scripts/reg.js' %}"></script>
 </body>
 </html>

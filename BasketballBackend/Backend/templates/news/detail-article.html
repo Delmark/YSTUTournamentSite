@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{% static 'css/teams.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
-    <title>Команды</title>
+    <title>Главная</title>
 </head>
 <body>
     <div class="flag" id="flag"></div>
@@ -33,13 +33,11 @@
         </div>
         {% elif user.is_superuser %}
         <div class="buttons">
-            <div class="registration-btn" id="registration-button_header" style="display:none;"></div><div class="logIn-btn" id="logIn-button_header" style="display:none;"></div>
             <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
             <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
         </div>
         {% else %}
         <div class="buttons">
-            <div class="registration-btn" id="registration-button_header" style="display:none;"></div><div class="logIn-btn" id="logIn-button_header" style="display:none;"></div>
             <p class="registration-btn">Личный кабинет</a></p>
             <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
         </div>
@@ -48,25 +46,25 @@
 
     <main class="main">
         <div class="reglog_backgr"></div>
-    
-        <form action="" method="get" class="search_field">
-            <input type="search" name="search" placeholder="Введите название команды">
-            <button type="submit" class="search_btn">
-                <i class='bx bx-search'></i>
-            </button>
-        </form>
-    
-        <section class="comand_list">
-            {% for team in teams %}
-            <div class="comand_card">
-                <img class="comand_card-photo" src="{{ team.teamstatistic_set.first.get_logo }}" alt="Логотип не доступен :(">
-                <p class="comand_card-name">{{ team.name }}</p>
-                <a href="{% url 'Teams:team-detail' team.id %}" class="comand_card-link">❯</a>
-            </div>
-            {% empty %}
-            <h2>Команды не найдены</h2>
+
+        <h1>{{ news.title }}</h1>
+        <p>{{ news.short_desc }}</p>
+        <p>{{ news.content }}</p>
+      
+        {% if images %}
+            <h2>Изображения:</h2>
+            {% for image in images %}
+            <img src="{{ image.image.url }}" alt="{{ news.title }}" />
             {% endfor %}
-        </section>
+        {% elif news.thumbnail %}
+            <p><img src="{{ news.thumbnail.url }}" alt="{{ news.title }}" /></p>
+        {% endif %}
+
+        {% if user.is_superuser %}
+            <a href='{% url 'delete-article' pk=news.pk %}'>Удалить новость</a>
+        {% endif %}
+
+    </main>
 
     <footer>
         <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
@@ -84,11 +82,9 @@
                         <p class="registration-btn" id="registration-button_footer">Регистрация</p>
                         <p class="logIn-btn" id="logIn-button_footer">Войти</p>
                     {% elif user.is_superuser %}
-                        <div class="registration-btn" id="registration-button_footer" style="display:none;"></div><div class="logIn-btn" id="logIn-button_footer" style="display:none;"></div>
                         <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
                         <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
                     {% else %}
-                        <div class="registration-btn" id="registration-button_footer" style="display:none;"></div><div class="logIn-btn" id="logIn-button_footer" style="display:none;"></div>
                         <p class="registration-btn">Личный кабинет</a></p>
                         <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
                     {% endif %}
@@ -97,6 +93,6 @@
         </div>
     </footer>
 
-    <script src="{% static 'scripts/reg.js' %}"></script>
+    <script src="{% static 'scripts/index.js' %}"></script>
 </body>
 </html>

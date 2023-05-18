@@ -166,8 +166,17 @@ main {
     width: 20%;
     height: 100%;
     margin: 0 0 0 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.comand_table-photo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0 20px 20px 0;
+    object-fit: cover;
+}
 .comand_table-name {
     color: #10498A;
     font-family: "DIN Pro Bold";
@@ -306,11 +315,16 @@ main {
 }
 
 .match_command_1-photo {
+    width: 100%;
+    height: 100%;
     background-color: #696969;
     border-radius: 20px 0 0 20px;
+    max-width: 100%;
 }
 
 .match_command_2-photo {
+    width: 100%;
+    height: 100%;
     background-color: #696969;
     border-radius: 0 20px 20px 0;
 }
@@ -321,6 +335,7 @@ main {
     font-size: 42px;
     text-align: center;
     margin-top: 28%;
+    max-width: 95%;
 }
 
 .match_info {

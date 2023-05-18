@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <title>Главная</title>
+</head>
+<body>
+    <div class="flag" id="flag"></div>
+
+    {% include 'login_registration.html' %}
+
+    <header id="header">
+        <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo" id="logo">
+        <div class="navigation">
+            <a href="{% url 'index' %}" class="main-link">Главная</a>
+            <a href="{% url 'Teams:teams' %}" class="teams-link">Команды</a>
+            <a href="{% url 'Games:schedule' %}" class="timetable-link">Расписание</a>
+            <a href="{% url 'results' %}" class="results-link">Результаты</a>
+            <a href="{% url 'Games:archieve' %} " class="archieve-link">Архив</a>
+            <a href="{% url 'contact' %}" class="contacts-link">Контакты</a>
+        </div>
+        {% if not user.is_authenticated %}
+        <div class="buttons">
+            <p class="registration-btn" id="registration-button_header">Регистрация</p>
+            <p class="logIn-btn" id="logIn-button_header">Войти</p>
+        </div>
+        {% elif user.is_superuser %}
+        <div class="buttons">
+            <div class="registration-btn" id="registration-button_header" style="display:none;"></div><div class="logIn-btn" id="logIn-button_header" style="display:none;"></div>
+            <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
+            <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+        </div>
+        {% else %}
+        <div class="buttons">
+            <div class="registration-btn" id="registration-button_header" style="display:none;"></div><div class="logIn-btn" id="logIn-button_header" style="display:none;"></div>
+            <p class="registration-btn">Личный кабинет</a></p>
+            <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+        </div>
+        {% endif %}
+    </header>
+
+    <main class="main">
+        <div class="reglog_backgr"></div>
+
+        <section class="carousel">
+            <div class="slide">
+                <img src="{% static 'content/images/carousel_photo.png' %}" alt="Photo 1" class="slide_photo fade">
+                <div class="slide_text">
+                    <p class="slide_text-box fade">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum mi at neque sodales ullamcorper.</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="{% static 'content/images/carousel_photo.png' %}" alt="Photo 2" class="slide_photo fade">
+                <div class="slide_text">
+                    <p class="slide_text-box fade">Событие 2</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="{% static 'content/images/carousel_photo.png' %}" alt="Photo 3" class="slide_photo fade">
+                <div class="slide_text">
+                    <p class="slide_text-box fade">Событие 3</p>
+                </div>
+            </div>
+            <a class="slide_prev" onclick="plusSlides(-1)">❮</a>
+            <a class="slide_next" onclick="plusSlides(1)">❯</a>
+            <div class="carousel_indicator" style="text-align:center">
+                <span class="sld-ind" onclick="currentSlide(1)"></span>
+                <span class="sld-ind" onclick="currentSlide(2)"></span>
+                <span class="sld-ind" onclick="currentSlide(3)"></span>
+            </div>
+        </section>
+
+        <section class="tournament_table">
+            <p class="tour-tbl_title">Турнирная сетка</p>
+            <div class="tour-tbl"></div>
+        </section>
+
+        <section class="teams-rating">
+            <p class="tm-rat_title">Рейтинг команд</p>
+            <div class="tm-rat">
+                <div class="tm-rat_1-3_places">
+                    {% for team in teams|slice:":3" %}
+                    <div class="tm-rat_{{forloop.counter}}_place">
+                        <div class="place_{{forloop.counter}}_form"><img src="{{ team.get_logo }}" class="team-logo" alt="logo"></div>
+                        <p class="place_{{forloop.counter}}_title">{{forloop.counter}} место - {{ team.team.name }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="tm-rat_4-10_places">
+                    {% for team in teams|slice:"3:" %}
+                    <div class="tm-rat_{{forloop.counter0|add:4}}_place">
+                        <div class="place_{{forloop.counter0|add:4}}_form"><img src="{{ team.get_logo }}" class="team-logo"></div>
+                        <p class="place_{{forloop.counter0|add:4}}_title">{{forloop.counter0|add:4}} место - {{ team.team.name }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+        <section class="news">
+            <p class="news_title"><a href="{% url 'news' %}">Новости</a></p>
+            {% for article in news %}
+            <div class="news_card">
+                <div class="news_card-textbox">
+                    <p class="news_card-title"><a href="{% url 'detail-article' pk=article.pk %}">{{article.title}}</a></p>
+                    <p class="news_card-text">{{article.short_desc}}</p>
+                    <p class="news_card-date">{{article.pub_date}}</p>
+                </div>
+                <img class="news_card-photo" src="{{ article.get_thumbnail }}" alt="{{ article.title }}">
+            </div>
+            {% endfor %}
+        </section>
+
+        <section class="photo_album">
+            <p class="pht-alb_title">Фото-галерея</p>
+            <div class="pht-alb">
+                {% for photo in photos %}
+                <div class="pht-alb_card">
+                    <img class="pht-alb_photo" src="{{ photo.get_image }}">
+                    <p class="pht-alb_signature"> {{photo.title}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="video_album">
+            <p class="vid-alb_title">Последние видео</p>
+            <div class="vid-alb">
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+                <div class="vid-alb_card">
+                    <div class="vid-alb_video"></div>
+                    <p class="vid-alb_signature">Подпись видео</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
+        <div class="links">
+            <div class="link-str">
+                <a href="https://vk.com/ystu_physedu" target="_blank" class="vk-link"><i class='bx bxl-vk'></i></a>
+                <a href=" {% url 'docs' %} " class="doc-link">Документация</a>
+                <a href=" {% url 'contact' %} " class="contact-link">Контакты</a>
+                <a href="https://www.ystu.ru/" target="_blank" class="site-link">www.ystu.ru</a>
+            </div>
+            <div class="link-buttons">
+                <a href="" class="mail-link">ПОЧТА@YSTU.RU</a>
+                <div class="btn-lnk">
+                    {% if not user.is_authenticated %}
+                        <p class="registration-btn" id="registration-button_footer">Регистрация</p>
+                        <p class="logIn-btn" id="logIn-button_footer">Войти</p>
+                    {% elif user.is_superuser %}
+                    <div class="registration-btn" id="registration-button_footer" style="display:none;"></div><div class="logIn-btn" id="logIn-button_footer" style="display:none;"></div>
+                        <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
+                        <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+                    {% else %}
+                        <div class="registration-btn" id="registration-button_footer" style="display:none;"></div><div class="logIn-btn" id="logIn-button_footer" style="display:none;"></div>
+                        <p class="registration-btn">Личный кабинет</a></p>
+                        <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'scripts/index.js' %}"></script>
+    <script src="{% static 'scripts/reg.js' %}"></script>
+</body>
+</html>
