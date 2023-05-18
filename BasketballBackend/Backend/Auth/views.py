@@ -59,3 +59,7 @@ def logout_view(request):
     logout(request)
     redirect_url = request.session.get('referer', 'index')
     return redirect(redirect_url)
+def org(request):
+    return render(request, 'org.html')
+def sched_red(request):
+    return render(request, 'sched_red.html')
