@@ -1,0 +1,382 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: rgb(255,171,94);
+    background: linear-gradient(45deg, rgba(255,171,94,1) 0%, rgba(198,198,255,1) 65%, rgba(91,108,255,1) 100%);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Подключение шрифтов */
+
+@font-face {
+    font-family: "DIN Pro Regular";
+    src: url(../content/fonts/dinpro.otf);
+}
+
+@font-face {
+    font-family: "DIN Pro Light";
+    src: url(../content/fonts/dinpro-light_0.otf);
+}
+
+@font-face {
+    font-family: "DIN Pro Medium";
+    src: url(../content/fonts/dinpro-medium_0.otf);
+}
+
+@font-face {
+    font-family: "DIN Pro Bold";
+    src: url(../content/fonts/dinpro-bold_0.otf);
+}
+
+
+/* Header */
+
+header .logo {
+    width: 400px;
+    height: 75px;
+}
+
+header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    height: 109px;
+    background-color: rgb(80, 161, 235, 0.28);
+}
+
+header .logo {
+    width: 410px;
+    height: 75px;
+    display: block;
+    margin: auto;
+}
+
+header .navigation {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+}
+
+header .navigation a {
+    display: block;
+    margin: auto;
+    text-decoration: none;
+    font-family: "DIN Pro Bold";
+    color: #10498A;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+header .navigation a:hover {
+    color: #CE690E;
+    text-decoration: underline;
+}
+
+header .navigation .main-link {
+    color: #CE690E;
+}
+
+header .buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+}
+
+header .buttons p {
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    text-align: center;
+    color: #000;
+    font-family: "DIN Pro Bold";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+header .buttons .registration-btn {
+    margin: auto;
+    margin-right: 0;
+    border: 3px solid #CE690E;
+    padding: 5px 10px 5px 10px;
+}
+
+header .buttons .registration-btn:hover {
+    background-color: #10498A;
+    color: #fff;
+}
+
+header .buttons .logIn-btn {
+    margin-left: 0;
+    border: 3px solid #10498A;
+    padding: 5px 10px 5px 10px;
+}
+
+header .buttons .logIn-btn:hover {
+    background-color: #CE690E;
+    color: #fff;
+}
+.regist_log {
+    position: absolute;
+    z-index: 2;
+    margin-top: calc(0% + 109px + 20px);
+    margin-left: 25%;
+    width: 50%;
+    height: 82%;
+    background-color: #fff;
+    border-radius: 30px;
+    display: none;
+    grid-template-rows: 77px 1fr;
+    transition: 0.5s ease;
+    pointer-events: all;
+    border: 9px solid #10498A;
+}
+
+.reglog_close-btn {
+    position: absolute;
+    color: #10498A;
+    font-size: 32px;
+    background-color: rgb(215, 215, 215);
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 1% 0 3.2% 92%;
+    width: 6%;
+    padding-top: 0px;
+    padding-left: 2.2%;
+    vertical-align: middle;
+    transition: 0.3s ease;
+    z-index: 1;
+}
+
+.reglog_close-btn:hover {
+    color: #CE690E;
+    background-color: rgb(184, 184, 184);
+    padding-left: 2.6%;
+    transition: 0.3s ease;
+}
+
+.reglog_backgr {
+    margin-top: -20px;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(7.5px);
+    transition: 0.5s ease;
+    display: none;
+    pointer-events: all;
+}
+
+.openedRegLog ~ main .reglog_backgr {
+    display: block;
+    transition: 0.5s ease;
+}
+
+.openedRegLog ~ .regist_log {
+    display: grid;
+    pointer-events: all;
+    transition: 0.5s ease;
+}
+
+.reglog_container {
+    display: grid;
+    grid-template-columns: 1fr 10px 1fr;
+    position: absolute;
+    margin: auto;
+}
+
+.reg_text, .log_text {
+    font-family: "DIN Pro Bold";
+    font-size: 32px;
+    color: #000;
+    margin: 15px auto auto auto;
+    text-align: center;
+}
+
+.reg_line {
+    border-radius: 30px;
+    background-color: #9e9e9e;
+    height: 96%;
+    width: 10px;
+    margin: 27px auto auto auto;
+}
+
+.reglog_container input {
+    width: 80%;
+    padding: 20px;
+    margin: 10px 0 10px 10%;
+    border-radius: 15px;
+    border: none;
+    background-color: #d9d9d9;
+    font-size: 20px;
+    font-family: "DIN Pro Bold";
+}
+
+.reglog_container input::placeholder {
+    font-family: "DIN Pro Bold";
+    font-size: 20px;
+}
+
+.reg_button {
+    padding: 15px 30px;
+    margin-top: 10px;
+    margin-left: 28%;
+    border-radius: 15px;
+    border: none;
+    background-color: #a9d6ff;
+    color: #10498a;
+    font-family: "DIN Pro Bold";
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.reg_button:hover {
+    background-color: #7bbdfb;
+}
+
+.log_button {
+    padding: 15px 30px;
+    margin-top: 10px;
+    margin-left: 35%;
+    border-radius: 15px;
+    border: none;
+    background-color: #ffdda9;
+    color: #CE690E;
+    font-family: "DIN Pro Bold";
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.log_button:hover {
+    background-color: #fbcb84;
+}
+
+.error-message {
+    color: #CE690E;
+    font-family: "DIN Pro Bold";
+    font-size: 20px;
+    margin: 5px 0;
+    text-align: center;
+}
+
+
+/* Footer */
+
+footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 150px;
+    background-color: rgb(80, 161, 235, 0.28);
+}
+
+footer .logo {
+    width: 410px;
+    height: 75px;
+    display: block;
+    margin: auto;
+}
+
+footer .links {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+footer .links .link-str a, footer .links .link-buttons .mail-link {
+    display: block;
+    margin: auto;
+    text-decoration: none;
+    font-family: "DIN Pro Bold";
+    color: #10498A;
+    text-align: center;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+footer .links .link-str .vk-link {
+    font-size: 32pt;
+}
+
+footer .links .link-str {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+}
+
+footer .links .link-str a:hover, footer .links .link-buttons .mail-link:hover {
+    color: #CE690E;
+    text-decoration: underline;
+}
+
+footer .links .link-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+footer .links .link-buttons a, footer .links .link-buttons p {
+    display: block;
+    margin: auto;
+    text-align: center;
+    color: #000;
+    font-family: "DIN Pro Bold";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    text-decoration: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+footer .links .link-buttons .btn-lnk {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+footer .links .link-buttons .btn-lnk .registration-btn {
+    cursor: pointer;
+    margin: auto;
+    border: 3px solid #CE690E;
+    padding: 5px 10px 5px 10px;
+}
+
+footer .links .link-buttons .btn-lnk .registration-btn:hover {
+    background-color: #10498A;
+    color: #fff;
+}
+
+footer .links .link-buttons .btn-lnk .logIn-btn {
+    cursor: pointer;
+    border: 3px solid #10498A;
+    padding: 5px 10px 5px 10px;
+}
+
+footer .links .link-buttons .btn-lnk .logIn-btn:hover {
+    background-color: #CE690E;
+    color: #fff;
+}
