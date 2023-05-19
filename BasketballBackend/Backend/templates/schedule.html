@@ -51,116 +51,64 @@
 
         <section class="nearest_match">
             <p class="near_match-title">Ближайшие матчи</p>
-            <div class="match_card">
-                <div class="match_command_1">
-                    <div class="match_command_1-photo"></div>
-                    <p class="match_command_1-name">Команда 1</p>
+            {% for match in all_matches %}
+                <div class="match_card">
+                    <div class="match_command_1">
+                        <img class="match_command_1-photo" src="{{match.team_1.teamstatistic_set.first.get_logo}}">
+                        <p class="match_command_1-name">{{ match.team_1.name }}</p>
+                    </div>
+                    <div class="match_info">
+                        <p class="match_date">{{ match.date|date:"d.m.Y" }}</p>
+                        <p class="match_place">{{ match.place }}</p>
+                        <p class="match-season">Сезон {{ match.season }}</p>
+                        <p class="match_score">{{ match.team_1_goals }}:{{ match.team_2_goals }}</p>
+                    </div>
+                    <div class="match_command_2">
+                        <p class="match_command_2-name">{{ match.team_2.name }}</p>
+                        <img class="match_command_2-photo" src="{{match.team_2.teamstatistic_set.first.get_logo}}">
+                    </div>
                 </div>
-                <div class="match_info">
-                    <p class="match_date">00.00.0000</p>
-                    <p class="match_place">СП Место</p>
-                    <p class="match-season">Сезон 1</p>
-                    <p class="match_score">0:0</p>
-                </div>
-                <div class="match_command_2">
-                    <p class="match_command_2-name">Команда 2</p>
-                    <div class="match_command_2-photo"></div>
-                </div>
-            </div>
-            <div class="match_card">
-                <div class="match_command_1">
-                    <div class="match_command_1-photo"></div>
-                    <p class="match_command_1-name">Команда 1</p>
-                </div>
-                <div class="match_info">
-                    <p class="match_date">00.00.0000</p>
-                    <p class="match_place">СП Место</p>
-                    <p class="match-season">Сезон 1</p>
-                    <p class="match_score">0:0</p>
-                </div>
-                <div class="match_command_2">
-                    <p class="match_command_2-name">Команда 2</p>
-                    <div class="match_command_2-photo"></div>
-                </div>
-            </div>
-            <div class="match_card">
-                <div class="match_command_1">
-                    <div class="match_command_1-photo"></div>
-                    <p class="match_command_1-name">Команда 1</p>
-                </div>
-                <div class="match_info">
-                    <p class="match_date">00.00.0000</p>
-                    <p class="match_place">СП Место</p>
-                    <p class="match-season">Сезон 1</p>
-                    <p class="match_score">0:0</p>
-                </div>
-                <div class="match_command_2">
-                    <p class="match_command_2-name">Команда 2</p>
-                    <div class="match_command_2-photo"></div>
-                </div>
-            </div>
-
-            <form class="list">
-                <select class="comand_list" name="comands" id="tournm_comand" required>
+            {% empty %}
+                <p class="near_match-title">Нет ближайших матчей</p>
+            {% endfor %}
+        
+            <form method="GET" class="list">
+                <select class="comand_list" name="team" id="team">
                     <option value="">Выберите команду</option>
-                    <option value="Comand 1">Команда 1</option>
-                    <option value="Comand 2">Команда 2</option>
-                    <option value="Comand 3">Команда 3</option>
+                    {% for team in teams %}
+                        <option value="{{ team.name }}">{{ team.name }}</option>
+                    {% endfor %}
                 </select>
-            </form>
-    
-            <p class="match_title">Команда 1</p>
-            <div class="match_card">
-                <div class="match_command_1">
-                    <div class="match_command_1-photo"></div>
-                    <p class="match_command_1-name">Команда 1</p>
-                </div>
-                <div class="match_info">
-                    <p class="match_date">00.00.0000</p>
-                    <p class="match_place">СП Место</p>
-                    <p class="match-season">Сезон 1</p>
-                    <p class="match_score">0:0</p>
-                </div>
-                <div class="match_command_2">
-                    <p class="match_command_2-name">Команда 2</p>
-                    <div class="match_command_2-photo"></div>
-                </div>
-            </div>
-            <div class="match_card">
-                <div class="match_command_1">
-                    <div class="match_command_1-photo"></div>
-                    <p class="match_command_1-name">Команда 1</p>
-                </div>
-                <div class="match_info">
-                    <p class="match_date">00.00.0000</p>
-                    <p class="match_place">СП Место</p>
-                    <p class="match-season">Сезон 1</p>
-                    <p class="match_score">0:0</p>
-                </div>
-                <div class="match_command_2">
-                    <p class="match_command_2-name">Команда 2</p>
-                    <div class="match_command_2-photo"></div>
-                </div>
-            </div>
-            <div class="match_card">
-                <div class="match_command_1">
-                    <div class="match_command_1-photo"></div>
-                    <p class="match_command_1-name">Команда 1</p>
-                </div>
-                <div class="match_info">
-                    <p class="match_date">00.00.0000</p>
-                    <p class="match_place">СП Место</p>
-                    <p class="match-season">Сезон 1</p>
-                    <p class="match_score">0:0</p>
-                </div>
-                <div class="match_command_2">
-                    <p class="match_command_2-name">Команда 2</p>
-                    <div class="match_command_2-photo"></div>
-                </div>
-            </div>
 
+                <button type="submit">Фильтровать</button>
+            </form>
+        
+            {% if team_filter %}
+                <p class="match_title">{{ team_filter }}</p>
+                {% for match in matches %}
+                    {% if match.team_1.name == team_filter or match.team_2.name == team_filter %}
+                        <div class="match_card">
+                            <div class="match_command_1">
+                                <img class="match_command_1-photo" src="{{match.team_1.teamstatistic_set.first.get_logo}}">
+                                <p class="match_command_1-name">{{ match.team_1.name }}</p>
+                            </div>
+                            <div class="match_info">
+                                <p class="match_date">{{ match.date|date:"d.m.Y" }}</p>
+                                <p class="match_place">{{ match.place }}</p>
+                                <p class="match-season">Сезон {{ match.season }}</p>
+                                <p class="match_score">{{ match.team_1_goals }}:{{ match.team_2_goals }}</p>
+                            </div>
+                            <div class="match_command_2">
+                                <p class="match_command_2-name">{{ match.team_2.name }}</p>
+                                <img class="match_command_2-photo" src="{{match.team_2.teamstatistic_set.first.get_logo}}">
+                            </div>
+                        </div>
+                    {% endif %}
+                {% empty %}
+                <p class="match_title">Нет ближайших матчей этой команды</p>
+                {% endfor %}
+            {% endif %} 
         </section>
-    </main>
 
     <footer>
         <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
@@ -179,7 +127,7 @@
                         <p class="logIn-btn" id="logIn-button_footer">Войти</p>
                     {% elif user.is_superuser %}
                     <div class="registration-btn" id="registration-button_footer" style="display:none;"></div><div class="logIn-btn" id="logIn-button_footer" style="display:none;"></div>
-                        <p class="registration-btn"><a href="{% url 'org' %}">Управление</a></p>
+                        <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
                         <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
                     {% else %}
                     <div class="registration-btn" id="registration-button_footer" style="display:none;"></div><div class="logIn-btn" id="logIn-button_footer" style="display:none;"></div>

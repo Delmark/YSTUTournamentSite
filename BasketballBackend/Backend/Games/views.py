@@ -1,10 +1,16 @@
 from django.shortcuts import render, HttpResponse
+from datetime import datetime
 from .models import Match
 from django.db.models import Q
-from Teams.models import TeamStatistic
+from Teams.models import TeamStatistic, Team
 
 def schedule(request):
-    return render(request, 'schedule.html')
+    matches = Match.objects.filter(date__gte=datetime.today(), is_finished=False).order_by('date')
+    team_filter = request.GET.get('team')
+    all_matches = matches
+    if team_filter:
+        matches = matches.filter(Q(team_1__name=team_filter) | Q(team_2__name=team_filter))
+    return render(request, 'schedule.html', {'matches': matches, 'teams': Team.objects.all(), 'team_filter': team_filter, 'all_matches': all_matches})
 
 def archieve(request):
     season = request.GET.get('season')
