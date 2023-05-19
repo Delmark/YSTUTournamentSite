@@ -9,7 +9,7 @@
     <div class="create-btn-container">
         <a href="{% url 'create-article'%}" class="create-btn">Создать новость</a>
       </div>
-      
+
     <h1>Формы</h1>
 
     <h2>Создание команды и ее статистики</h2>
@@ -33,6 +33,12 @@
         {{ match_form.as_p }}
         <button type="submit" name="match">Создать матч</button>
     </form>
+
+    <h1>Сайт</h1>
+
+    <div class="create-btn-container">
+        <a href="{% url 'admin:index'%}" class="create-btn">Панель управления базой данных сайта</a>
+      </div>
 </body>
 {%endblock%}
 

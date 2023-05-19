@@ -19,12 +19,12 @@ class PlayerCreationForm(forms.ModelForm):
     class Meta:
         model = Player
         fields = ['team', 'name', 'last_name', 'middle_name', 'photo', 'height']
-        widgets = {
-            'date': forms.DateInput(attrs={'type': 'date'}),
-            'time': forms.TimeInput(attrs={'type': 'time'}),
-        }
 
 class MatchCreationForm(forms.ModelForm):
     class Meta:
         model = Match
         fields = ['team_1', 'team_2', 'date', 'time', 'place', 'season', 'is_finished', 'team_1_goals', 'team_2_goals']
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+            'time': forms.TimeInput(attrs={'type': 'time'}),
+        }

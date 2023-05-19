@@ -33,8 +33,8 @@ class Player(models.Model):
 
 class TeamStatistic(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE)
-    logo = models.ImageField(upload_to='teams/logos/', blank=True)
-    rating = models.IntegerField(default=0, blank=True)
+    logo = models.ImageField(verbose_name="Логотип команды", upload_to='teams/logos/', blank=True)
+    rating = models.IntegerField(verbose_name = "Рейтинг команды", default=0, blank=True)
     played_games = models.IntegerField(verbose_name="Сыграно игр", default=0, blank=True)
     wins = models.IntegerField(verbose_name="Победы", default=0, blank=True)
     draws = models.IntegerField(verbose_name="Ничьи", default=0, blank=True)
