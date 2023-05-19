@@ -1,8 +1,38 @@
 {% extends 'layout.html' %}
-{% load static%}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/orgpage.css' %}">
+{% endblock %}
+
 {% block content%}
 <body>
-    <a href="{% url 'sched_red'%}"><button>Отредактировать расписание</button></a>
+    <div class="create-btn-container">
+        <a href="{% url 'create-article'%}" class="create-btn">Создать новость</a>
+      </div>
+      
+    <h1>Формы</h1>
+
+    <h2>Создание команды и ее статистики</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ team_form.as_p }}
+        {{ team_statistic_form.as_p }}
+        <button type="submit" name="team">Создать команду</button>
+    </form>
+
+    <h2>Создание игрока</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ player_form.as_p }}
+        <button type="submit" name="player">Создать игрока</button>
+    </form>
+
+    <h2>Создание матча</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ match_form.as_p }}
+        <button type="submit" name="match">Создать матч</button>
+    </form>
 </body>
 {%endblock%}
 

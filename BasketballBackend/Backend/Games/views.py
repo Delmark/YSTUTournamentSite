@@ -22,14 +22,11 @@ def archieve(request):
     team_statistics = None
 
     if len(matches) == 0:
-        # Handle case where there are no matches
         team_statistics = []
     elif len(matches) == 1:
-        # Handle case where there is only one match
         match = matches.first()
         team_statistics = TeamStatistic.objects.filter(Q(team=match.team_1) | Q(team=match.team_2))
     else:
-        # Handle case where there are multiple matches
         team_statistics = TeamStatistic.objects.filter(
             *[Q(team=match.team_1) | Q(team=match.team_2) for match in matches]
         )
