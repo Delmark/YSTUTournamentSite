@@ -52,9 +52,15 @@
         <section class="comand_table">
             <a href="{% url 'Teams:teams' %}" class="comand_table-link">❮</a>
             <p class="comand_table-name">{{ team.name }}</p>
+            {% if static.logo %}
             <div class="comand_table-photo">
                 <img src="{{ statistic.get_logo }}" alt="Логотип временно не доступен :(">
             </div>
+            {% else %}
+            <div class="comand_table-photo">
+                <img src="{% static 'content/images/noimg.jpg' %}" alt="Логотип временно не доступен :(">
+            </div>
+            {% endif %}
         </section>
     
         <section class="bar">
@@ -73,7 +79,7 @@
                             {% if player.photo %}
                             <img src="{{ player.photo.url }}" alt="{{ player.get_full_name }}">
                             {% else %}
-                            <img src="{% static 'image/placeholder.png' %}" alt="{{ player.get_full_name }}">
+                            <img src="{% static 'image/noimg.jpg' %}" alt="{{ player.get_full_name }}">
                             {% endif %}
                         </div>
                         <p class="person_card-name">{{ player.get_full_name }}</p>
@@ -112,7 +118,7 @@
                         {% if match.team_1.teamstatistic_set.first.logo %}
                         <img class="match_command_1-photo" src="{{ match.team_1.teamstatistic_set.first.get_logo }}" alt="{{ match.team_1.name }} logo">
                         {% else %}
-                        <img class="match_command_1-photo" src="{% static 'img/default_logo.png' %}" alt="{{ match.team_1.name }} logo">
+                        <img class="match_command_1-photo" src="{% static 'content/images/noimg.jpg' %}" alt="{{ match.team_1.name }} logo">
                         {% endif %}
                         <p class="match_command_1-name">{{ match.team_1.name }}</p>
                     </div>
@@ -131,7 +137,7 @@
                             {% if match.team_2.teamstatistic_set.first.logo %}
                             <img class="match_command_2-photo" src="{{ match.team_2.teamstatistic_set.first.get_logo }}" alt="{{ match.team_2.name }} logo">
                             {% else %}
-                            <img class="match_command_2-photo" src="{% static 'image/default_logo.png' %}" alt="{{ match.team_2.name }} logo">
+                            <img class="match_command_2-photo" src="{% static 'content/images/noimg.jpg' %}" alt="{{ match.team_2.name }} logo">
                             {% endif %}
                     </div>
                 </div>

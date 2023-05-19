@@ -90,21 +90,27 @@
         </section>
 
         <section class="partner">
+            {% for partner in partners %}
             <p class="tour-pr_title">Партнер</p>
             <div class="pht-pr">
                 <div class="pht-pr_card">
-                    <div class="pht-pr_photo"></div>
+                    {% if partner.photo %}
+                    <img class="pht-pr_photo" src="{{partner.photo.url}}">
+                    {% else %}
+                    <img class="pht-pr_photo" src="{% static 'content/images/logoplaceholder.jpg' %}">
+                    {% endif %}
                     <p class="pht-pr_signature">
-                        Название компании
-                        Ссылка на сайт
+                        {{partner.company_name}}
+                        {% if partner.partner_site_link %}
+                        {{partner.partner_site_link}}
+                        {% endif %}
                     </p>
                 </div>
                 <p class="pr_card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem, porro ut voluptatibus ex explicabo eligendi! Quasi, modi cupiditate porro corporis voluptatem odit non ducimus, possimus nesciunt corrupti animi eum consequatur!
-                    Placeat corrupti in facilis molestiae quod tempora fugit similique, quasi dicta accusantium possimus distinctio perspiciatis repudiandae quidem neque. Corrupti voluptates officia autem quas, rem est velit dolorum tempore vitae voluptas?
-                    Recusandae dolorem odit qui tempora, saepe laboriosam rem nisi dicta est asperiores tempore earum? Alias consequuntur illo, illum, quam voluptas fugit tempora veritatis reprehenderit harum recusandae, rem porro impedit deserunt?
+                    {{partner.partner_description}}
                 </p>
             </div>
+            {% endfor %}
         </section>
     </main>
 

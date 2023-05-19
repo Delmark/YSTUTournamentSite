@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from django.db.models import Q
 from .forms import NewsCreateForm, ArticleImageForm, ArticleImageFormset
-from .models import News, Photo, ArticleImage
-from Teams.models import TeamStatistic
+from .models import News, Photo, ArticleImage, Partner
+from Teams.models import TeamStatistic, Team
+from Games.models import Match
 
 def index(request):
     news = News.objects.order_by('-pub_date')[:3]
@@ -57,10 +59,18 @@ def all_news(request):
 
 
 def contacts(request):
-    return render(request, 'contacts.html')
+    partners = Partner.objects.all()
+    return render(request, 'contacts.html', {'partners': partners})
 
 def docs(request):
     return render(request, 'docs.html')
 
 def results(request):
-    return render(request, 'results.html')
+    teams = Team.objects.all()
+    team_filter = request.GET.get("team")
+    
+    if team_filter:
+        matches = Match.objects.filter(Q(team_1__name=team_filter) | Q(team_2__name=team_filter))
+    else:
+        matches = Match.objects.filter(is_finished=True).order_by('date')
+    return render(request, 'results.html', {'teams': teams, 'matches': matches})

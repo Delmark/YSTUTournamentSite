@@ -54,7 +54,11 @@
             {% for match in all_matches %}
                 <div class="match_card">
                     <div class="match_command_1">
+                        {% if match.team_1.teamstatistic_set.first.logo %}
                         <img class="match_command_1-photo" src="{{match.team_1.teamstatistic_set.first.get_logo}}">
+                        {% else %}
+                        <img class="match_command_1-photo" src="{% static 'content/images/noimg.jpg' %}">
+                        {% endif %}
                         <p class="match_command_1-name">{{ match.team_1.name }}</p>
                     </div>
                     <div class="match_info">
@@ -65,7 +69,11 @@
                     </div>
                     <div class="match_command_2">
                         <p class="match_command_2-name">{{ match.team_2.name }}</p>
+                        {% if match.team_2.teamstatistic_set.first.logo %}
                         <img class="match_command_2-photo" src="{{match.team_2.teamstatistic_set.first.get_logo}}">
+                        {% else %}
+                        <img class="match_command_2-photo" src="{% static 'content/images/noimg.jpg' %}">
+                        {% endif %}
                     </div>
                 </div>
             {% empty %}
@@ -89,7 +97,11 @@
                     {% if match.team_1.name == team_filter or match.team_2.name == team_filter %}
                         <div class="match_card">
                             <div class="match_command_1">
+                                {% if match.team_1.teamstatistic_set.first.logo %}
                                 <img class="match_command_1-photo" src="{{match.team_1.teamstatistic_set.first.get_logo}}">
+                                {% else %}
+                                <img class="match_command_1-photo" src="{% static 'content/images/noimg.jpg' %}">
+                                {% endif %}
                                 <p class="match_command_1-name">{{ match.team_1.name }}</p>
                             </div>
                             <div class="match_info">
@@ -100,7 +112,11 @@
                             </div>
                             <div class="match_command_2">
                                 <p class="match_command_2-name">{{ match.team_2.name }}</p>
+                                {% if match.team_2.teamstatistic_set.first.logo %}
                                 <img class="match_command_2-photo" src="{{match.team_2.teamstatistic_set.first.get_logo}}">
+                                {% else %}
+                                <img class="match_command_2-photo" src="{% static 'content/images/noimg.jpg' %}">
+                                {% endif %}
                             </div>
                         </div>
                     {% endif %}

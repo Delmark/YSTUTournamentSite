@@ -70,7 +70,11 @@
             {% for match in matches %}
                 <div class="match_card">
                     <div class="match_command_1">
-                        <img class="match_command_1-photo" src="{{ match.team_1.teamstatistic_set.first.get_logo }}" alt="{{ match.team_1 }}">
+                        {% if match.team_1.teamstatistic_set.first.logo %}
+                        <img class="match_command_1-photo" src="{{match.team_1.teamstatistic_set.first.get_logo}}">
+                        {% else %}
+                        <img class="match_command_1-photo" src="{% static 'content/images/noimg.jpg' %}">
+                        {% endif %}
                         <p class="match_command_1-name">{{ match.team_1 }}</p>
                     </div>
                     <div class="match_info">
@@ -81,7 +85,11 @@
                     </div>
                     <div class="match_command_2">
                         <p class="match_command_2-name">{{ match.team_2 }}</p>
-                        <img class="match_command_2-photo" src="{{ match.team_2.teamstatistic_set.first.get_logo }}" alt="{{ match.team_2 }}">
+                        {% if match.team_2.teamstatistic_set.first.logo %}
+                        <img class="match_command_2-photo" src="{{match.team_2.teamstatistic_set.first.get_logo}}">
+                        {% else %}
+                        <img class="match_command_2-photo" src="{% static 'content/images/noimg.jpg' %}">
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

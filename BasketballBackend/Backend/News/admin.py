@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import News, ArticleImage, Photo
+from .models import News, ArticleImage, Photo, Partner
 
 class ArticleImageInline(admin.TabularInline):
     model = ArticleImage
@@ -24,3 +24,4 @@ class PhotoAdmin(admin.ModelAdmin):
     list_filter = ['pub_date']
 
 admin.site.register(Photo, PhotoAdmin)
+admin.site.register(Partner)

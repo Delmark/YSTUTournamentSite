@@ -59,7 +59,11 @@
         <section class="comand_list">
             {% for team in teams %}
             <div class="comand_card">
-                <img class="comand_card-photo" src="{{ team.teamstatistic_set.first.get_logo }}" alt="Логотип не доступен :(">
+                {% if team.teamstatistic_set.first.logo %}
+                <img class="comand_card-photo" src="{{ team.teamstatistic_set.first.get_logo }}">
+                {% else %}
+                <img class="comand_card-photo" src="{% static 'content/images/noimg.jpg' %}">
+                {% endif %}
                 <p class="comand_card-name">{{ team.name }}</p>
                 <a href="{% url 'Teams:team-detail' team.id %}" class="comand_card-link">❯</a>
             </div>

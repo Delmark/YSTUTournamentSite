@@ -49,56 +49,44 @@
     <main class="main">
         <div class="reglog_backgr"></div>
 
-        <section class="tournament_table">
-            <p class="tour-tbl_title">Турнирная сетка</p>
-            <div class="tour-tbl"></div>
-        </section>
-
-        <form class="list">
-            <select class="comand_list" name="comands" id="tournm_comand" required>
+        <form method="GET" class="list">
+            <select class="comand_list" name="team" id="tournm_comand" required>
                 <option value="">Выберите команду</option>
-                <option value="Comand 1">Команда 1</option>
-                <option value="Comand 2">Команда 2</option>
-                <option value="Comand 3">Команда 3</option>
+                {% for team in teams %}
+                <option value="{{team.name}}">{{team.name}}</option>
+                {% endfor %}
             </select>
+
+            <button type="submit">Фильтровать</button>
         </form>
 
-        <p class="match_title">Команда 1</p>
-        <div class="match_card">
-            <div class="match_command_1">
-                <div class="match_command_1-photo"></div>
-                <p class="match_command_1-name">Команда 1</p>
+        {% for match in matches %}
+            <p class="match_title">Команда 1</p>
+            <div class="match_card">
+                <div class="match_command_1">
+                    {% if match.team_1.teamstatistic_set.first.logo %}
+                    <img class="match_command_1-photo" src="{{match.team_1.teamstatistic_set.first.get_logo}}">
+                    {% else %}
+                    <img class="match_command_1-photo" src="{% static 'content/images/noimg.jpg' %}">
+                    {% endif %}
+                    <p class="match_command_1-name">{{match.team_1.name}}</p>
+                </div>
+                <div class="match_info">
+                    <p class="match_date">{{match.date}} - {{match.time}}</p>
+                    <p class="match_place">{{match.place}}</p>
+                    <p class="match-season">{{match.season}}</p>
+                    <p class="match_score">{{match.team_1_goals}}:{{match.team_2_goals}}</p>
+                </div>
+                <div class="match_command_2">
+                    <p class="match_command_2-name">{{match.team_2.name}}</p>
+                    {% if match.team_2.teamstatistic_set.first.logo %}
+                    <img class="match_command_2-photo" src="{{match.team_1.teamstatistic_set.first.get_logo}}">
+                    {% else %}
+                    <img class="match_command_2-photo" src="{% static 'content/images/noimg.jpg' %}">
+                    {% endif %}
+                </div>
             </div>
-            <div class="match_info">
-                <p class="match_date">00.00.0000</p>
-                <p class="match_place">СП Место</p>
-                <p class="match-season">Сезон 1</p>
-                <p class="match_score">0:0</p>
-            </div>
-            <div class="match_command_2">
-                <p class="match_command_2-name">Команда 2</p>
-                <div class="match_command_2-photo"></div>
-            </div>
-        </div>
-        <div class="match_card">
-            <div class="match_command_1">
-                <div class="match_command_1-photo"></div>
-                <p class="match_command_1-name">Команда 1</p>
-            </div>
-            <div class="match_info">
-                <p class="match_date">00.00.0000</p>
-                <p class="match_place">СП Место</p>
-                <p class="match-season">Сезон 1</p>
-                <p class="match_score">0:0</p>
-            </div>
-            <div class="match_command_2">
-                <p class="match_command_2-name">Команда 2</p>
-                <div class="match_command_2-photo"></div>
-            </div>
-        </div>
-
-        <p class="scores_title">Статистика</p>
-        <div class="scores_form"></div>
+        {% endfor %}
     </main>
 
     <footer>

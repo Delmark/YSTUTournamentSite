@@ -16,7 +16,7 @@ def archieve(request):
     season = request.GET.get('season')
     match_id = request.GET.get('match')
 
-    matches = Match.objects.all()
+    matches = Match.objects.filter(is_finished=True)
 
     if season and match_id:
         matches = matches.filter(season=season, id=match_id)

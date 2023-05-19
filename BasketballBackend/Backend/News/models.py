@@ -38,3 +38,12 @@ class Photo(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+class Partner(models.Model):
+    company_name = models.CharField(verbose_name="Название компании", max_length=120)
+    partner_description = models.TextField(verbose_name="Описание партнёра")
+    partner_site_link = models.URLField(verbose_name="Ссылка на сайт партнёра", blank=True, null=True)
+    photo = models.ImageField(verbose_name='Логотип партнёра', blank=True, upload_to='partners/', validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'webp', 'jpeg', 'gif'))])
+
+    def __str__(self):
+        return f"О партнёре {self.company_name}"
