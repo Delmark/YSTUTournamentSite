@@ -34,7 +34,7 @@
         </div>
         {% elif user.is_superuser %}
         <div class="buttons">
-            <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
+            <p class="registration-btn"><a href="{% url 'org' %}">Управление</a></p>
             <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
         </div>
         {% else %}
@@ -89,7 +89,7 @@
                         <p class="registration-btn" id="registration-button_footer">Регистрация</p>
                         <p class="logIn-btn" id="logIn-button_footer">Войти</p>
                     {% elif user.is_superuser %}
-                        <p class="registration-btn"><a href="{% url 'admin:index' %}">Управление</a></p>
+                        <p class="registration-btn"><a href="{% url 'org' %}">Управление</a></p>
                         <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
                     {% else %}
                         <p class="registration-btn">Личный кабинет</a></p>

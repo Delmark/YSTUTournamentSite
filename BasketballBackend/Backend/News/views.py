@@ -52,7 +52,7 @@ def news_detail(request, pk):
     return render(request, 'news/detail-article.html', {'news': news, 'images': images})
 
 def all_news(request):
-    news = News.objects.order_by('-pub_date')[:3]
+    news = News.objects.order_by('-pub_date')
     return render(request, 'news/news-page.html', {'news': news})
 
 
