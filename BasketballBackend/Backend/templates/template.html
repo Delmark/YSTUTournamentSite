@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href=" {% static 'css/template.css' %}">
+    {% block meta %}{% endblock meta %}
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+
+<header id="header">
+    <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo" id="logo">
+    <div class="navigation">
+        <a href="index.html" class="main-link">Главная</a>
+        <a href="teams.html" class="teams-link">Команды</a>
+        <a href="schedule.html" class="timetable-link">Расписание</a>
+        <a href="results.html" class="results-link">Результаты</a>
+        <a href="archieve.html" class="archieve-link">Архив</a>
+        <a href="contacts.html" class="contacts-link">Контакты</a>
+    </div>
+    {% if not user.is_authenticated %}
+    <div class="buttons">
+        <p class="registration-btn" id="registration-button_header">Регистрация</p>
+        <p class="logIn-btn" id="logIn-button_header">Войти</p>
+    </div>
+    {% elif user.is_superuser %}
+    <div class="buttons">
+        <p class="registration-btn">Управление турниром</p>
+        <p class="logIn-btn">Выйти</p>
+    </div>
+    {% else %}
+    <div class="buttons">
+        <a class="registration-btn">Личный кабинет</a>
+        <a class="logIn-btn">Выйти</a>
+    </div>
+    {% endif %}
+</header>
+
+    <main class="main">{% block content %}{% endblock content %}</main>
+
+    <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
+    <div class="links">
+        <div class="link-str">
+            <a href="https://vk.com/ystu_physedu" target="_blank" class="vk-link"><i class='bx bxl-vk'></i></a>
+            <a href="docs.html" class="doc-link">Документация</a>
+            <a href="contacts.html" class="contact-link">Контакты</a>
+            <a href="https://www.ystu.ru/" target="_blank" class="site-link">www.ystu.ru</a>
+        </div>
+        <div class="link-buttons">
+            <a href="" class="mail-link">ПОЧТА@YSTU.RU</a>
+            <div class="btn-lnk">
+                <p class="registration-btn" id="registration-button_footer">Регистрация</p>
+                <p class="logIn-btn" id="logIn-button_footer">Войти</p>
+            </div>
+        </div>
+    </div>
+</footer>
+    {% block scripts %}{% endblock scripts %}
+</body>
+</html>

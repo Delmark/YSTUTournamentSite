@@ -1,0 +1,99 @@
+.main form {
+    width: 60%;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #fff;
+    }
+    
+    .main form h1 {
+    text-align: center;
+    color: #10498A;
+    font-family: "DIN Pro Bold";
+    font-size: 32px;
+    margin-bottom: 20px;
+    }
+    
+    .main form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #10498A;
+    font-family: "DIN Pro Bold";
+    font-size: 20px;
+    }
+    
+    .main form input,
+    .main form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #d9d9d9;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-family: "DIN Pro Regular";
+    }
+    
+    .main form button {
+    display: block;
+    width: 30%;
+    margin: 20px auto 0 auto;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #CE690E;
+    color: #fff;
+    font-family: "DIN Pro Bold";
+    font-size: 20px;
+    cursor: pointer;
+    }
+    
+    .main form button:hover {
+    background-color: #fb8450;
+    }
+    
+    .image_upload {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin-bottom: 20px;
+    }
+    
+    .image_upload img {
+    width: 250px;
+    height: 170px;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    margin-right: 10px;
+    }
+    
+    .image_upload input {
+    display: none;
+    }
+    
+    .image_upload label {
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    cursor: pointer;
+    }
+    
+    .image_upload label:hover {
+    color: #CE690E;
+    }
+    
+    .image_upload button {
+    margin: 0;
+    width: 100%;
+    border: 1px dashed #d9d9d9;
+    border-radius: 5px;
+    }
+    
+    .image_upload button i {
+    color: #d9d9d9;
+    font-size: 70px;
+    }
+    
+    .image_upload input:checked + label > button {
+    border: 1px solid #CE690E;
+    color: #CE690E;
+    }

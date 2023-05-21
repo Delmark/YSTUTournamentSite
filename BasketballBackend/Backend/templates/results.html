@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{% static 'css/results.css' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <title>Результаты</title>
+</head>
+<body>
+    <div class="flag" id="flag"></div>
+
+    {% include 'login_registration.html' %}
+
+    <header id="header">
+        <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo" id="logo">
+        <div class="navigation">
+            <a href="{% url 'index' %}" class="main-link">Главная</a>
+            <a href="{% url 'Teams:teams' %}" class="teams-link">Команды</a>
+            <a href="{% url 'Games:schedule' %}" class="timetable-link">Расписание</a>
+            <a href="{% url 'results' %}" class="results-link">Результаты</a>
+            <a href="{% url 'Games:archieve' %} " class="archieve-link">Архив</a>
+            <a href="{% url 'contact' %}" class="contacts-link">Контакты</a>
+        </div>
+        {% if not user.is_authenticated %}
+        <div class="buttons">
+            <p class="registration-btn" id="registration-button_header">Регистрация</p>
+            <p class="logIn-btn" id="logIn-button_header">Войти</p>
+        </div>
+        {% elif user.is_superuser %}
+        <div class="buttons">
+            <div class="registration-btn" id="registration-button_header" style="display:none;"></div><div class="logIn-btn" id="logIn-button_header" style="display:none;"></div>
+            <p class="registration-btn"><a href="{% url 'org' %}">Управление</a></p>
+            <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+        </div>
+        {% else %}
+        <div class="buttons">
+            <div class="registration-btn" id="registration-button_header" style="display:none;"></div><div class="logIn-btn" id="logIn-button_header" style="display:none;"></div>
+            <p class="registration-btn">Личный кабинет</a></p>
+            <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+        </div>
+        {% endif %}
+    </header>
+
+    <main class="main">
+        <div class="reglog_backgr"></div>
+
+        <form method="GET" class="list">
+            <select class="comand_list" name="team" id="tournm_comand" required>
+                <option value="">Выберите команду</option>
+                {% for team in teams %}
+                <option value="{{team.name}}">{{team.name}}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Фильтровать</button>
+        </form>
+
+        {% for match in matches %}
+            <p class="match_title">Команда 1</p>
+            <div class="match_card">
+                <div class="match_command_1">
+                    {% if match.team_1.teamstatistic_set.first.logo %}
+                    <img class="match_command_1-photo" src="{{match.team_1.teamstatistic_set.first.get_logo}}">
+                    {% else %}
+                    <img class="match_command_1-photo" src="{% static 'content/images/noimg.jpg' %}">
+                    {% endif %}
+                    <p class="match_command_1-name">{{match.team_1.name}}</p>
+                </div>
+                <div class="match_info">
+                    <p class="match_date">{{match.date}} - {{match.time}}</p>
+                    <p class="match_place">{{match.place}}</p>
+                    <p class="match-season">{{match.season}}</p>
+                    <p class="match_score">{{match.team_1_goals}}:{{match.team_2_goals}}</p>
+                </div>
+                <div class="match_command_2">
+                    <p class="match_command_2-name">{{match.team_2.name}}</p>
+                    {% if match.team_2.teamstatistic_set.first.logo %}
+                    <img class="match_command_2-photo" src="{{match.team_1.teamstatistic_set.first.get_logo}}">
+                    {% else %}
+                    <img class="match_command_2-photo" src="{% static 'content/images/noimg.jpg' %}">
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </main>
+
+    <footer>
+        <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
+        <div class="links">
+            <div class="link-str">
+                <a href="https://vk.com/ystu_physedu" target="_blank" class="vk-link"><i class='bx bxl-vk'></i></a>
+                <a href=" {% url 'docs' %} " class="doc-link">Документация</a>
+                <a href=" {% url 'contact' %} " class="contact-link">Контакты</a>
+                <a href="https://www.ystu.ru/" target="_blank" class="site-link">www.ystu.ru</a>
+            </div>
+            <div class="link-buttons">
+                <a href="" class="mail-link">ПОЧТА@YSTU.RU</a>
+                <div class="btn-lnk">
+                    {% if not user.is_authenticated %}
+                        <p class="registration-btn" id="registration-button_footer">Регистрация</p>
+                        <p class="logIn-btn" id="logIn-button_footer">Войти</p>
+                    {% elif user.is_superuser %}
+                    <div class="registration-btn" id="registration-button_footer" style="display:none;"></div><div class="logIn-btn" id="logIn-button_footer" style="display:none;"></div>
+                        <p class="registration-btn"><a href="{% url 'org' %}">Управление</a></p>
+                        <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+                    {% else %}
+                    <div class="registration-btn" id="registration-button_footer" style="display:none;"></div><div class="logIn-btn" id="logIn-button_footer" style="display:none;"></div>
+                        <p class="registration-btn">Личный кабинет</a></p>
+                        <p class="logIn-btn"><a href="{% url 'logout' %}">Выйти</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'scripts/reg.js' %}"></script>
+</body>
+</html>
