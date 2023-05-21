@@ -7,7 +7,7 @@ Password: NoWaying
 
 # Развертывание
 Скачиваем репозиторий, если на компьютере установлен гит, то в выделенной под него папке с помощью консоли прописываем:
-```git clone -b Fullstack https://github.com/Delmark/YSTUTournamentSite.git```  
+```git clone https://github.com/Delmark/YSTUTournamentSite.git```  
 
 После установки репозитория у себя на компьютере, необходимо в консоли в директории с репозиторием создать виртуальное окружение:
 ```python -m venv BasketballBackend``` 
