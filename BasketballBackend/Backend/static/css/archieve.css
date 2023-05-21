@@ -256,6 +256,35 @@ main {
     border-radius: 20px;
 }
 
+.team_statistic {
+    margin: 50px auto;
+    width: 80%;
+    background-color: #fff;
+    border-radius: 30px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    }
+    
+.team_info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 20px;
+    justify-content: space-between;
+}
+    
+.team_name,
+.team_rating,
+.team_played_games,
+.team_wins,
+.team_draws,
+.team_losses {
+    margin: 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "DIN Pro Bold";
+    color: #10498A;
+}
+
 /* Registration/Log In */
 
 .regist_log {

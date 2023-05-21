@@ -1,0 +1,36 @@
+.news-crt-costil {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    }
+
+.news-create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #10498A;
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 60%;
+    transition: background-color 0.3s ease;
+    }
+    
+    .news-create a {
+    color: #fff;
+    text-decoration: none;
+    font-family: "DIN Pro Bold";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    max-width: 60%;
+    text-align: center;
+    }
+    
+    .news-create:hover {
+    background-color: #CE690E;
+    }
+    
+    .news-create:hover a {
+    color: #fff;
+    }
