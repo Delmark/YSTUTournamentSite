@@ -10,7 +10,7 @@ from Games.models import Match
 def index(request):
     news = News.objects.order_by('-pub_date')[:3]
     photo = Photo.objects.order_by('-pub_date')[:6]
-    teams = TeamStatistic.objects.order_by('rating').all()
+    teams = TeamStatistic.objects.order_by('rating').all()[:10]
 
     context = {'news': news,
         'photos': photo,
