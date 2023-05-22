@@ -1,5 +1,8 @@
+{%extends 'layout.html'%}
 {% load static %}
-<!DOCTYPE html>
+{%block title%}Команды{%endblock title%}
+{%block style%}<link rel="stylesheet" href="{% static 'css/teams.css' %}">{%endblock style%}
+<!--<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -45,7 +48,7 @@
         </div>
         {% endif %}
     </header>
-
+-->{%block content%}
     <main class="main">
         <div class="reglog_backgr"></div>
     
@@ -71,8 +74,8 @@
             <h2>Команды не найдены</h2>
             {% endfor %}
         </section>
-
-    <footer>
+{%endblock content%}
+    <!--<footer>
         <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
         <div class="links">
             <div class="link-str">
@@ -100,7 +103,7 @@
             </div>
         </div>
     </footer>
-
-    <script src="{% static 'scripts/reg.js' %}"></script>
-</body>
-</html>
+-->
+    {%block scripts%}<script src="{% static 'scripts/reg.js' %}"></script>{%endblock scripts%}
+<!--</body>
+</html>-->

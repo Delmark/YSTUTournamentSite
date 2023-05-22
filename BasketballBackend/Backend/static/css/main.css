@@ -94,9 +94,6 @@ header .navigation a:hover {
     text-decoration: underline;
 }
 
-header .navigation .main-link {
-    color: #CE690E;
-}
 
 header .buttons {
     display: grid;

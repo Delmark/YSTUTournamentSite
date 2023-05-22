@@ -1,5 +1,6 @@
+{% extends 'layout.html'%}
 {% load static %}
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -11,8 +12,9 @@
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <title>Главная</title>
-</head>
-<body>
+</head>-->
+{%block style%}<link rel="stylesheet" href="{% static 'css/index.css' %}">{%endblock style%}
+<!--<body>
     <div class="flag" id="flag"></div>
 
     {% include 'login_registration.html' %}
@@ -46,7 +48,7 @@
         </div>
         {% endif %}
     </header>
-
+-->{%block content%}
     <main class="main">
         <div class="reglog_backgr"></div>
 
@@ -156,7 +158,7 @@
             </div>
         </section>
     </main>
-
+{%endblock content%}<!--
     <footer>
         <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
         <div class="links">
@@ -185,8 +187,9 @@
             </div>
         </div>
     </footer>
-
+-->{%block scripts%}
     <script src="{% static 'scripts/index.js' %}"></script>
     <script src="{% static 'scripts/reg.js' %}"></script>
-</body>
-</html>
+    {%endblock scripts%}
+<!--</body>
+</html>-->
