@@ -1,4 +1,12 @@
+{%extends 'layout.html'%}
 {% load static %}
+{%block title%}Главная{%endblock title%}
+{%block style%}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+{%endblock style%}
+{%block content%}
+<!--
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -45,7 +53,7 @@
         </div>
         {% endif %}
     </header>
-
+-->
     <main class="main">
         <div class="reglog_backgr"></div>
 
@@ -75,7 +83,8 @@
             {% endfor %}
         </section>
     </main>
-
+{%endblock content%}
+<!--
     <footer>
         <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
         <div class="links">
@@ -102,7 +111,7 @@
             </div>
         </div>
     </footer>
-
-    <script src="{% static 'scripts/reg.js' %}"></script>
-</body>
-</html>
+-->
+    {%block scripts%}<script src="{% static 'scripts/reg.js' %}"></script>{%endblock scripts%}
+<!--</body>
+</html>-->

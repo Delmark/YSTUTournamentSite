@@ -1,5 +1,6 @@
+{% extends 'layout.html'%}
 {% load static %}
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -45,7 +46,10 @@
         </div>
         {% endif %}
     </header>
-
+-->
+    {%block title%}Архив{%endblock title%}
+    {%block style%}<link rel="stylesheet" href=" {% static 'css/archieve.css' %}">{%endblock style%}
+    {%block content%}
     <main class="main">
         <div class="reglog_backgr"></div>
 
@@ -111,8 +115,7 @@
         {% endfor %}
         </div>
     </main>
-
-    <footer>
+    <!--<footer>
         <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
         <div class="links">
             <div class="link-str">
@@ -136,9 +139,9 @@
                     {% endif %}
                 </div>
             </div>
-        </div>
-    </footer>
-
-    <script src="{% static 'scripts/reg.js' %}"></script>
-</body>
-</html>
+        </div> 
+    </footer>-->
+    {%endblock content%}
+    {%block scripts%}<script src="{% static 'scripts/reg.js' %}"></script>{%endblock scripts%}
+<!--</body>
+</html>-->

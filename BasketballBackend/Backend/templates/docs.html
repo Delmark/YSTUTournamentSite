@@ -1,5 +1,8 @@
+{%extends 'layout.html'%}
 {% load static %}
-<!DOCTYPE html>
+{%block title%}Документация{%endblock title%}
+{%block style%}<link rel="stylesheet" href="{% static 'css/docs.css' %}">{%endblock style%}
+<!--<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -45,7 +48,7 @@
         </div>
         {% endif %}
     </header>
-
+-->{%block content%}
     <main class="main">
         <div class="reglog_backgr"></div>
 
@@ -76,7 +79,8 @@
             </a>
         </div>
     </main>
-
+    {%endblock content%}
+<!--
     <footer>
         <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
         <div class="links">
@@ -105,8 +109,9 @@
             </div>
         </div>
     </footer>
-
+-->{%block scripts%}
     <script src=" {% static 'scripts/docs.js' %}"></script>
     <script src="{% static 'scripts/reg.js' %}"></script>
-</body>
-</html>
+    {%endblock scripts%}
+<!--</body>
+</html>-->

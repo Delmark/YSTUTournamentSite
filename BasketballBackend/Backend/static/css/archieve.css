@@ -1,3 +1,6 @@
+header .navigation .archieve-link {
+    color: #CE690E;
+}/*
 html, body {
     margin: 0;
     padding: 0;
@@ -27,7 +30,7 @@ body {
 }
 
 /* Подключение шрифтов */
-
+/*
 @font-face {
     font-family: "DIN Pro Regular";
     src: url(../content/fonts/dinpro.otf);
@@ -50,7 +53,7 @@ body {
 
 
 /* Header */
-
+/*
 header .logo {
     width: 400px;
     height: 75px;
@@ -94,9 +97,6 @@ header .navigation a:hover {
     text-decoration: underline;
 }
 
-header .navigation .archieve-link {
-    color: #CE690E;
-}
 
 header .buttons {
     display: grid;
@@ -426,7 +426,7 @@ main {
 
 
 /* Footer */
-
+/*
 footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
