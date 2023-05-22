@@ -72,12 +72,12 @@ main {
 }
 
 .slide_text-box {
-    width: 100%;
+    width: 90%;
     max-height: 194px;
     margin: auto;
     position: absolute;
     top: 20%;
-    left: 20%;
+    left: 5%;
 }
 
 .carousel_indicator {
@@ -279,6 +279,15 @@ main {
     text-align: center;
 }
 
+.news_title a {
+    color: #10498A;
+    text-decoration: none;
+}
+
+.news_title a:hover {
+    color: #CE690E;
+}
+
 .news_card {
     width: calc(100% - 433px);
     height: 100%;
@@ -306,6 +315,15 @@ main {
     margin: 0;
 }
 
+.news_card-title a {
+    color: #000;
+    text-decoration: none;
+}
+
+.news_card-title a:hover {
+    color: #CE690E;
+}
+
 .news_card-text {
     margin: 0;
     color: #000;
@@ -317,7 +335,7 @@ main {
     color: #9e9e9e;
     font-size: 24px;
     font-family: "DIN Pro Light";
-    margin: 0 0 0 82%;
+    margin: 0 0 0 73%;
 }
 
 .news_card-photo {

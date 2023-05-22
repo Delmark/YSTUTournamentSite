@@ -1,6 +1,8 @@
 header .navigation .archieve-link {
     color: #CE690E;
-}/*
+}
+
+/*
 html, body {
     margin: 0;
     padding: 0;
@@ -152,9 +154,29 @@ main {
     background-color: rgba(255, 255, 255, 0.3);
 }
 
+.lists {
+    margin-bottom: 20px;
+}
+
+.lists button {
+    padding: 5px 15px;
+    border-radius: 10px;
+    background-color: #d2d2d2;
+    color: #696969;
+    font-family: "DIN Pro Bold";
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+}
+
+.lists button:hover {
+    background-color: #e7e7e7;
+    color: #5c5c5c;
+}
+
 .period_list {
     width: 30%;
-    margin-left: 17.5%;
+    margin-left: 15.2%;
     padding: 5px 5px 5px 15px;
     border-radius: 10px;
     background-color: #d2d2d2;
@@ -166,7 +188,6 @@ main {
 
 .match_list {
     width: 30%;
-    margin-left: 5%;
     padding: 5px 5px 5px 15px;
     border-radius: 10px;
     background-color: #d2d2d2;
@@ -216,9 +237,10 @@ main {
 .match_command_1-name, .match_command_2-name {
     color: #10498A;
     font-family: "DIN Pro Bold";
-    font-size: 42px;
+    font-size: 1.5vw;
     text-align: center;
-    margin-top: 28%;
+    margin: auto;
+    overflow: hidden;
 }
 
 .match_info {

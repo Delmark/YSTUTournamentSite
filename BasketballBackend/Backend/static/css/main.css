@@ -122,6 +122,15 @@ header .buttons .registration-btn {
     padding: 5px 10px 5px 10px;
 }
 
+header .buttons a {
+    color: #000;
+    text-decoration: none;
+}
+
+header .buttons a:hover {
+    color: #fff;
+}
+
 header .buttons .registration-btn:hover {
     background-color: #10498A;
     color: #fff;
@@ -137,6 +146,7 @@ header .buttons .logIn-btn:hover {
     background-color: #CE690E;
     color: #fff;
 }
+
 .regist_log {
     position: absolute;
     z-index: 2;
@@ -355,6 +365,15 @@ footer .links .link-buttons .btn-lnk {
     grid-template-columns: 1fr 1fr;
 }
 
+footer .links .link-buttons .btn-lnk a {
+    color: #000;
+    text-decoration: none;
+}
+
+footer .links .link-buttons .btn-lnk a:hover {
+    color: #fff;
+}
+
 footer .links .link-buttons .btn-lnk .registration-btn {
     cursor: pointer;
     margin: auto;
@@ -377,3 +396,4 @@ footer .links .link-buttons .btn-lnk .logIn-btn:hover {
     background-color: #CE690E;
     color: #fff;
 }
+

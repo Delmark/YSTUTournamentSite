@@ -190,6 +190,22 @@ main {
     border: none;
 }
 
+.list button {
+    padding: 5px 15px;
+    border-radius: 10px;
+    background-color: #d2d2d2;
+    color: #696969;
+    font-family: "DIN Pro Bold";
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+}
+
+.list button:hover {
+    background-color: #e7e7e7;
+    color: #5c5c5c;
+}
+
 .match_title {
     color: #10498A;
     font-family: "DIN Pro Bold";
@@ -230,9 +246,10 @@ main {
 .match_command_1-name, .match_command_2-name {
     color: #10498A;
     font-family: "DIN Pro Bold";
-    font-size: 42px;
+    font-size: 1.5vw;
     text-align: center;
-    margin-top: 28%;
+    margin: auto;
+    overflow: hidden;
 }
 
 .match_info {

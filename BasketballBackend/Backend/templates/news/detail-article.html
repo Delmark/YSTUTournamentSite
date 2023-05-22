@@ -68,7 +68,7 @@
                 <img src="{{ image.image.url }}" alt="{{ news.title }}" />
                 {% endfor %}
             {% elif news.thumbnail %}
-                <p><img src="{{ news.thumbnail.url }}" alt="{{ news.title }}" /></p>
+                <p class="photo-container"><img src="{{ news.thumbnail.url }}" alt="{{ news.title }}" /></p>
             {% endif %}
         
             {% if user.is_superuser %}
@@ -77,7 +77,7 @@
         </div>
 
     </main>
-{%block content%}
+{%endblock content%}
   <!--<footer>
         <img src="{% static 'content/images/logo.png' %}" alt="Лого сайта" class="logo">
         <div class="links">

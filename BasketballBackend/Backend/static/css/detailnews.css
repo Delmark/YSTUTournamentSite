@@ -1,35 +1,47 @@
 .news_page {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.3);
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
     }
     
     .news_header {
     margin-bottom: 20px;
+    text-align: center;
+    }
+
+    .photo-container {
+        text-align: center;
     }
     
     .news_header h1 {
     font-size: 36px;
     margin-bottom: 10px;
     color: #10498A;
+    font-family: "DIN Pro Bold";
     }
     
     .news_header p {
     font-size: 20px;
-    color: #CE690E;
+    color: #9f500c;
+    font-weight: 700;
+    font-family: "DIN Pro Medium";
     }
     
     .news_content {
     font-size: 24px;
     line-height: 1.5;
     color: #333;
+    font-family: "DIN Pro Light";
     }
     
     .news_content img {
     max-width: 100%;
     margin-bottom: 20px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    img {
+        border-radius: 20px;
+        text-align: center;
+        max-width: 100%;
     }
     
     .news_content img:hover {
